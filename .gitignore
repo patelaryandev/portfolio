@@ -58,14 +58,30 @@ pnpm-debug.log*
 .DS_Store
 Thumbs.db
 
-# Local AI and tool workspaces
+# AI assistants and local tool workspaces (not part of the website)
+.claude/
+.claude-*/
+CLAUDE.md
+CLAUDE.local.md
+AGENTS.md
+GEMINI.md
+.mcp.json
+.agents/
+.codex/
+.cursor/
+.cursorrules
+.gemini/
+.windsurf/
+.aider*
+.continue/
+.copilot/
+.serena/
 .superpowers/
 .remember/
 .gstack/
 .impeccable/
-.claude/
-CLAUDE.md
-AGENTS.md
+docs/superpowers/
+graphify-out/
 
 # Personal source material (LinkedIn screenshots contain private contact info)
 /*.jpeg
