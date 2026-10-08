@@ -5,7 +5,7 @@ describe('scanText', () => {
   it.each([
     ['call 98765 43210', 'phone'], ['+91-9876543210', 'phone'], ['+91 98765 43210', 'phone'],
     ['href="https://github.com/witharyan/Nivaran"', 'old-nivaran-repo'], ['a Flutter app', 'flutter'],
-    ['written in Dart', 'dart'], ['ported from', 'ported'], ['Tech Head', 'tech-head'],
+    ['written in Dart', 'dart'], ['ported from', 'ported'], ['Tech Head', 'tech-head'], ['built in React Native', 'react-native'], ['a Mobile App', 'mobile-app'],
   ])('flags %s', (text, rule) => expect(scanText(text)).toContain(rule));
 
   it.each([

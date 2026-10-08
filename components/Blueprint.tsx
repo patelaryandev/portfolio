@@ -57,7 +57,7 @@ export function Blueprint({ stamp, siteVersion, variant = 'panel' }: { stamp: Bu
           <rect className="dest" x="12" y="226" width="140" height="40" fill="var(--paper)" /><text x="20" y="251">Site files (Worker)</text>
           <path d="M82 66 V126" markerEnd="url(#ar)" /><path d="M82 166 V226" markerEnd="url(#ar)" />
           <DeployColumn steps={stamp.steps} />
-          <text x="196" y="300">built {built(stamp.time)}</text>
+          <text x="328" y="300" textAnchor="end">built {built(stamp.time)}</text>
         </svg>
         <div className="pkt t2" aria-hidden="true" /><div className="pkt t1" aria-hidden="true" />
         <div className="pkt" ref={dotRef} aria-hidden="true" /><div className="ripple" aria-hidden="true" />

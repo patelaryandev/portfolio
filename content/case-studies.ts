@@ -34,7 +34,7 @@ export const caseStudies: CaseStudy[] = [
         { d: 'M110 60 L250 120' }, { d: 'M320 60 V120' }, { d: 'M530 60 L390 120' },
         { d: 'M250 160 L110 220' }, { d: 'M320 160 V220' }, { d: 'M390 160 L530 220' },
       ],
-      notes: [{ x: 74, y: 44, text: 'cron: graduates archived every 1 June' }],
+      notes: [{ x: 2, y: 91, text: 'cron: graduates archived every 1 June' }],
     },
     excerpts: [
       { title: 'Admin requests prove who you are', file: 'gfg/auth.js', lang: 'js', source: 'gfg-rkgit-worker · src/middleware/auth.js', note: 'Firebase ID token checked in the Worker, keys cached in KV' },
@@ -90,10 +90,10 @@ export const caseStudies: CaseStudy[] = [
       ],
       arrows: [
         { d: 'M140 40 H165' }, { d: 'M305 40 H330' }, { d: 'M470 40 H495' },
-        { d: 'M562 60 V100 H235 V150', dashed: true },
-        { d: 'M305 170 H330' }, { d: 'M165 170 H140' }, { d: 'M305 160 Q 400 120 495 160' },
+        { d: 'M562 60 V88 H235 V150', dashed: true },
+        { d: 'M305 170 H330' }, { d: 'M165 170 H140' }, { d: 'M235 190 V212 H562 V190' },
       ],
-      notes: [{ x: 30, y: 46, text: 'every tag is a deployable image' }],
+      notes: [{ x: 40, y: 45, text: 'every tag is a deployable image' }],
     },
     excerpts: [
       { title: 'A container that checks itself', file: 'prometheus/Dockerfile', lang: 'dockerfile', source: 'prometheus · Dockerfile', note: 'dependencies in their own cached layer, a non-root user and a /health check' },

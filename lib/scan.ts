@@ -5,6 +5,8 @@ const RULES: [string, RegExp][] = [
   ['flutter', /\bFlutter\b/i],
   ['dart', /\bDart\b/],
   ['ported', /\bported\b/i],
+  ['react-native', /\bReact[\s-]?Native\b/i],
+  ['mobile-app', /\bmobile app\b/i],
   ['tech-head', /\bTech Head\b/i],
 ];
 
