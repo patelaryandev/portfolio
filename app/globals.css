@@ -100,3 +100,32 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
   .drawing::before { content: "swipe the drawing →"; display: block; position: sticky; left: 0; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
   .drawing-note { position: static; display: block; transform: none; margin-top: 8px; white-space: normal; }
 }
+
+.home { display: grid; grid-template-columns: 1fr 400px; min-height: 100vh; min-height: 100dvh; }
+.home .left { padding: 44px 48px 40px 56px; }
+.home .name { margin-top: 56px; }
+.home .panel { border-left: 1.5px solid var(--ink); display: flex; }
+.home .panel .blueprint { flex: 1; }
+.more { margin-top: 16px; font-size: 14px; }
+.about { margin-top: 48px; max-width: 60ch; }
+.about h2 { font-family: var(--font-serif), serif; font-weight: 400; font-size: 24px; }
+.about p { margin-top: 10px; color: var(--body); }
+.contact { list-style: none; padding: 0; margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px 24px; }
+@media (max-width: 1000px) {
+  .home { grid-template-columns: 1fr; min-height: 0; }
+  .home .left { padding: 28px 22px 24px; }
+  .home .name { margin-top: 28px; }
+  .home .panel { border-left: none; border-top: 1.5px solid var(--ink); }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .home .name { margin-top: 12px; font-size: clamp(36px, 7vw, 48px); }
+  .home .left { padding-top: 16px; }
+  .log { margin-top: 20px; }
+}
+
+.page { padding: 44px 56px 64px; }
+.page .name { margin-top: 32px; }
+.section-h { font-family: var(--font-serif), serif; font-weight: 400; font-size: 28px; margin: 48px 0 16px; }
+.results { padding-left: 20px; }
+.results li { margin-top: 6px; }
+@media (max-width: 1000px) { .page { padding: 28px 22px 48px; } }
