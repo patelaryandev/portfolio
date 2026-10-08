@@ -10,7 +10,7 @@ const env = {
   VISIT_COUNTER: { idFromName: () => 'id', get: () => ({ hit }) },
 } as never;
 const call = (path: string, method = 'GET') =>
-  worker.fetch(new Request(`https://witharyan.tech${path}`, { method }) as never, env);
+  worker.fetch(new Request(`https://patelaryan.dev${path}`, { method }) as never, env);
 
 describe('worker router', () => {
   it('GET /api/visit dispatches to visit', async () => {

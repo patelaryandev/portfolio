@@ -1,6 +1,6 @@
 # witharyan
 
-Personal portfolio of Aryan Patel, live at https://witharyan.tech. Next.js static export served by one Cloudflare Worker.
+Personal portfolio of Aryan Patel, live at https://patelaryan.dev. Next.js static export served by one Cloudflare Worker.
 
 ## Run it
 

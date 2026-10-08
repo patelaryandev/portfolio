@@ -8,7 +8,7 @@ export const site = {
     'As Vice President of the GFG Campus Body, I build and run the platform our 300+ members use for events, attendance and the team site.',
     "Hackathons: 1st at Techtrix '25 (100+ teams), 2nd at Binary Hacks 3.0, 3rd at SRIJAN 2025.",
   ],
-  email: 'hi@witharyan.tech',
+  email: 'hi@patelaryan.dev',
   github: 'https://github.com/witharyan',
   linkedin: 'https://www.linkedin.com/in/aryan-patel-865572327/',
 } as const;

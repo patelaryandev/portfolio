@@ -1,4 +1,4 @@
-# Every push to main is checked, built and deployed to the Worker behind witharyan.tech.
+# Every push to main is checked, built and deployed to the Worker behind patelaryan.dev.
 # Pull requests get the same checks and build, without the deploy.
 name: deploy
 
@@ -57,7 +57,7 @@ jobs:
     timeout-minutes: 10
     environment:
       name: production
-      url: https://witharyan.tech
+      url: https://patelaryan.dev
     steps:
       - uses: actions/checkout@v4
 

@@ -14,8 +14,8 @@
   "durable_objects": { "bindings": [{ "name": "VISIT_COUNTER", "class_name": "VisitCounter" }] },
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["VisitCounter"] }],
   "routes": [
-    { "pattern": "witharyan.tech", "custom_domain": true },
-    { "pattern": "www.witharyan.tech", "custom_domain": true }
+    { "pattern": "patelaryan.dev", "custom_domain": true },
+    { "pattern": "www.patelaryan.dev", "custom_domain": true }
   ],
   "observability": { "enabled": true }
 }

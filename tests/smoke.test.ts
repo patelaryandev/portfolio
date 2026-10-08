@@ -10,7 +10,7 @@ describe('static export', () => {
   it('homepage has the title, the email and the live panel', () => {
     const html = page('index.html');
     expect(html).toContain('Vice President, GFG Campus Body RKGIT');
-    expect(html).toContain('mailto:hi@witharyan.tech');
+    expect(html).toContain('mailto:hi@patelaryan.dev');
     expect(html).toContain('How this page reached you');
   });
   it('the code toggle works without JS', () => {

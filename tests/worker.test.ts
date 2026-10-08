@@ -4,7 +4,7 @@ import { handlePing, handleVisit, utcDay } from '../worker/handlers';
 
 const build = { sha: 'a3f9c1e', time: '2026-10-08T04:11:00.000Z' };
 const req = (method = 'GET', colo?: string) =>
-  Object.assign(new Request('https://witharyan.tech/api/visit', { method }), colo ? { cf: { colo } } : {});
+  Object.assign(new Request('https://patelaryan.dev/api/visit', { method }), colo ? { cf: { colo } } : {});
 
 describe('nextCount', () => {
   it('starts at 1', () => expect(nextCount(undefined, '2026-10-08')).toEqual({ day: '2026-10-08', count: 1 }));
