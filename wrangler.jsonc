@@ -1,0 +1,21 @@
+// The real site: static files from out/ plus a small Worker for /api/*.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "witharyan",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  },
+  "durable_objects": { "bindings": [{ "name": "VISIT_COUNTER", "class_name": "VisitCounter" }] },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["VisitCounter"] }],
+  "routes": [
+    { "pattern": "witharyan.tech", "custom_domain": true },
+    { "pattern": "www.witharyan.tech", "custom_domain": true }
+  ],
+  "observability": { "enabled": true }
+}
