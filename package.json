@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/stamp.ts && next dev",
-    "build": "node scripts/stamp.ts && node scripts/github.ts && next build && node scripts/weigh.ts && next build && node scripts/weigh.ts --verify",
+    "build": "node scripts/stamp.ts && node scripts/github.ts && next build && node scripts/weigh.ts && next build && node scripts/weigh.ts --verify && node scripts/check-out.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit && tsc --noEmit -p worker",
     "snapshot": "node scripts/github.ts --write-snapshot"
