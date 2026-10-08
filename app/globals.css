@@ -28,8 +28,10 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 .diag text { font-family: var(--font-draft), sans-serif; font-size: 13px; fill: var(--blue-ink); stroke: none; }
 .mono { font-family: var(--font-mono), monospace; font-size: 13px; }
 
+.row-pen { font-size: 23px; margin-left: 12px; transform: rotate(-2deg); }
 @media (max-width: 1000px) {
   .name { font-size: clamp(40px, 12vw, 56px); }
   .row { grid-template-columns: 72px 1fr; gap: 4px 16px; }
   .row .d { grid-column: 2; text-align: left; }
+  .row-pen { display: block; margin: 4px 0 0; }
 }
