@@ -17,7 +17,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'gfg-rkgit',
     title: 'GFG RKGIT platform',
-    problem: 'Our GFG Campus Body runs events, registrations and attendance for 300+ members. A club platform has to outlive the students who built it, so I made the browser untrusted: every write goes through one API that checks who you are and how often you have asked.',
+    problem: 'Our GFG Campus Body runs events, registrations and attendance for 300+ members. A club platform has to outlive the students who built it, so I made the browser untrusted: admin actions and form submissions go through one API that checks who you are, and Firestore rules limit what the browser can write directly.',
     drawing: {
       viewBox: '0 0 640 290',
       label: 'Three React apps (public site, admin portal, team portal) call one Cloudflare Worker API at api.gfg.rkgit.in, which uses Firestore with security rules, KV for token keys and rate limits, and R2 for media.',
@@ -37,11 +37,11 @@ export const caseStudies: CaseStudy[] = [
       notes: [{ x: 74, y: 44, text: 'cron: graduates archived every 1 June' }],
     },
     excerpts: [
-      { title: 'Every write proves who you are', file: 'gfg/auth.js', lang: 'js', source: 'gfg-rkgit-worker · src/middleware/auth.js', note: 'Firebase ID token checked in the Worker, keys cached in KV' },
-      { title: 'Rules the browser cannot bypass', file: 'gfg/firestore.rules', lang: 'js', source: 'gfg-rkgit-infra · firestore.rules', note: 'the repo has an emulator test suite for these rules' },
+      { title: 'Admin requests prove who you are', file: 'gfg/auth.js', lang: 'js', source: 'gfg-rkgit-worker · src/middleware/auth.js', note: 'Firebase ID token checked in the Worker, keys cached in KV' },
+      { title: 'Rules for what the browser may write directly', file: 'gfg/firestore.rules', lang: 'js', source: 'gfg-rkgit-infra · firestore.rules', note: 'the repo has an emulator test suite for these rules' },
       { title: 'Access that expires on its own', file: 'gfg/revoke-scanner-access.js', lang: 'js', source: 'gfg-rkgit-worker · src/scheduled/revoke-scanner-access.js', note: 'a daily cron removes event-scanner access' },
     ],
-    results: ['Used by 300+ members of GFG Campus Body RKGIT', 'Public writes rate-limited per user: 5 registrations, 3 feedback forms, 1 career application a day', 'Admin actions need a token and an active admin record'],
+    results: ['Used by 300+ members of GFG Campus Body RKGIT', 'Form submissions through the Worker need a sign-in and are rate-limited per user: 3 feedback submissions per form and 1 career application a day', 'Admin actions need a token and an active admin record'],
     links: [],
   },
   {
@@ -98,7 +98,7 @@ export const caseStudies: CaseStudy[] = [
     excerpts: [
       { title: 'A container that checks itself', file: 'prometheus/Dockerfile', lang: 'dockerfile', source: 'prometheus · Dockerfile', note: 'dependencies in their own cached layer, a non-root user and a /health check' },
       { title: 'Release on tag', file: 'prometheus/release.yml', lang: 'yaml', source: 'prometheus · .github/workflows/release.yml', note: 'smoke-tests the container before pushing' },
-      { title: 'Metrics and errors wired in', file: 'prometheus/main.py', lang: 'python', source: 'prometheus · app/main.py', note: 'Prometheus metrics set up at startup; Sentry starts when a DSN is configured' },
+      { title: 'Metrics and errors wired in', file: 'prometheus/main.py', lang: 'python', source: 'prometheus · app/main.py', note: 'Prometheus metrics wired into the app; Sentry starts when a DSN is configured' },
     ],
     results: ['CI, CodeQL and a release workflow on GitHub Actions', 'Versioned images on GHCR', 'Deploy blueprint for Render included'],
     links: [{ label: 'Source on GitHub', href: 'https://github.com/witharyan/prometheus' }],
