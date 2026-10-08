@@ -1,17 +1,16 @@
 // components/Blueprint.tsx
 'use client';
-import { useCallback, useEffect, useReducer, useRef } from 'react';
+import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import type { BuildStamp } from '@/lib/stamp';
 import { LAND_MS, fetchVisit, initialLive, liveReducer, timeRequest } from '@/lib/live';
 import { DeployColumn } from './DeployColumn';
 import { TitleBlock } from './TitleBlock';
 
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
-const built = (iso: string) =>
-  new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' }).format(new Date(iso)) + ' IST';
 
-export function Blueprint({ stamp, siteVersion, variant = 'panel' }: { stamp: BuildStamp; siteVersion: string; variant?: 'panel' | 'sheet' }) {
+export function Blueprint({ stamp, siteVersion, builtAt, variant = 'panel' }: { stamp: BuildStamp; siteVersion: string; builtAt: string; variant?: 'panel' | 'sheet' }) {
   const [live, dispatch] = useReducer(liveReducer, initialLive);
+  const [mounted, setMounted] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLDivElement>(null);
   const alive = useRef(true);
@@ -24,6 +23,7 @@ export function Blueprint({ stamp, siteVersion, variant = 'panel' }: { stamp: Bu
 
   useEffect(() => {
     alive.current = true;
+    setMounted(true);
     const root = rootRef.current!, dot = dotRef.current!;
     const io = new IntersectionObserver(([e]) => root.classList.toggle('offscreen', !e.isIntersecting));
     io.observe(root);
@@ -44,9 +44,9 @@ export function Blueprint({ stamp, siteVersion, variant = 'panel' }: { stamp: Bu
   const colo = live.colo ?? 'edge';
 
   return (
-    <div ref={rootRef} className={`blueprint grid ${variant} ${down ? 'is-down' : ''}`}>
+    <div ref={rootRef} className={`blueprint grid ${variant} ${down ? 'is-down' : ''} ${mounted ? 'mounted' : ''}`}>
       <h2 className="bp-title">How this page reached you</h2>
-      <p className="bp-sub">{down ? 'Live data unavailable right now.' : 'Live. Measured on your visit, not a picture.'}</p>
+      <p className="bp-sub">{down ? 'Live data unavailable right now.' : live.status === 'live' ? 'Live. Measured on your visit, not a picture.' : 'Connecting…'}</p>
       <div className="stage">
         <svg className="diag" viewBox="0 0 340 330" fill="none" stroke="var(--blue-ink)" strokeWidth="1.4" role="img"
           aria-label={`Your browser, then Cloudflare ${colo}, then the site files on a Worker. Deploys: ${stamp.steps.join(', then ')}.`}>
@@ -57,7 +57,7 @@ export function Blueprint({ stamp, siteVersion, variant = 'panel' }: { stamp: Bu
           <rect className="dest" x="12" y="226" width="140" height="40" fill="var(--paper)" /><text x="20" y="251">Site files (Worker)</text>
           <path d="M82 66 V126" markerEnd="url(#ar)" /><path d="M82 166 V226" markerEnd="url(#ar)" />
           <DeployColumn steps={stamp.steps} />
-          <text x="328" y="300" textAnchor="end">built {built(stamp.time)}</text>
+          <text x="328" y="300" textAnchor="end">built {builtAt}</text>
         </svg>
         <div className="pkt t2" aria-hidden="true" /><div className="pkt t1" aria-hidden="true" />
         <div className="pkt" ref={dotRef} aria-hidden="true" /><div className="ripple" aria-hidden="true" />
@@ -76,14 +76,14 @@ export function Blueprint({ stamp, siteVersion, variant = 'panel' }: { stamp: Bu
         </div>
       ) : null}
       <dl className="facts">
-        <dt>Last deploy</dt><dd>{built(stamp.time)}, from {stamp.branch}</dd>
+        <dt>Last deploy</dt><dd>{builtAt}, from {stamp.branch}</dd>
         <dt>Visits today</dt><dd>{live.visitsToday?.toLocaleString('en-IN') ?? '–'}</dd>
         <dt>Pipeline</dt><dd>{stamp.steps.join(' → ')}</dd>
       </dl>
       <TitleBlock cells={[
         { label: 'Revision', value: siteVersion },
         { label: 'Build', value: stamp.sha },
-        { label: 'Status', value: down ? 'static' : <><span className="dot" />live</> },
+        { label: 'Status', value: live.status === 'live' ? <><span className="dot" />live</> : 'static' },
       ]} />
     </div>
   );

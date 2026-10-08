@@ -28,3 +28,7 @@ function parseLog(log: string): Commit[] {
     return { sha, time, subject: rest.join(' ') };
   });
 }
+
+// Formatted on the server at build time so the browser never runs Intl for it.
+export const formatBuilt = (iso: string) =>
+  new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' }).format(new Date(iso)) + ' IST';

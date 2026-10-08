@@ -5,7 +5,7 @@ import { Contact } from '@/components/Contact';
 import build from '@/content/build.json';
 import { entries } from '@/content/projects';
 import { site } from '@/content/site';
-import type { BuildStamp } from '@/lib/stamp';
+import { formatBuilt, type BuildStamp } from '@/lib/stamp';
 import { siteVersion, withVersions } from '@/lib/version';
 
 const stamp = build as BuildStamp;
@@ -28,7 +28,7 @@ export default function Home() {
         </section>
       </section>
       <aside className="panel" aria-label="How this page reached you">
-        <Blueprint stamp={stamp} siteVersion={version} />
+        <Blueprint stamp={stamp} siteVersion={version} builtAt={formatBuilt(stamp.time)} />
       </aside>
     </main>
   );

@@ -10,4 +10,9 @@ const RULES: [string, RegExp][] = [
   ['tech-head', /\bTech Head\b/i],
 ];
 
-export const scanText = (text: string) => RULES.filter(([, re]) => re.test(text)).map(([name]) => name);
+// Numbers written with any spaces, hyphens or dots between digits.
+const PHONE_LOOSE = /(?<!\d)(?:91)?[6-9]\d{9}(?!\d)/;
+const looseHit = (text: string) => PHONE_LOOSE.test(text.replace(/(?<=\d)[\s.-]+(?=\d)/g, ''));
+
+export const scanText = (text: string) =>
+  RULES.filter(([name, re]) => re.test(text) || (name === 'phone' && looseHit(text))).map(([name]) => name);

@@ -14,7 +14,7 @@ export async function CodeExcerpt({ excerpt }: { excerpt: Excerpt }) {
         <span className="pen excerpt-note">{excerpt.note}</span>
       </figcaption>
       <div className="code" dangerouslySetInnerHTML={{ __html: html }} />
-      {lines > 12 ? <details><summary>show all {lines} lines</summary></details> : null}
+      {lines > 12 ? <details><summary><span className="more">show all {lines} lines</span><span className="less">show less</span></summary></details> : null}
     </figure>
   );
 }

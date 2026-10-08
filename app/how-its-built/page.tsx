@@ -2,12 +2,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Blueprint } from '@/components/Blueprint';
-import { formatMonth } from '@/components/Changelog';
 import { CodeExcerpt } from '@/components/CodeExcerpt';
 import { TitleBlock } from '@/components/TitleBlock';
 import build from '@/content/build.json';
 import weight from '@/content/weight.json';
-import type { BuildStamp } from '@/lib/stamp';
+import { formatBuilt, type BuildStamp } from '@/lib/stamp';
 import { siteVersion } from '@/lib/version';
 import type { Weight } from '@/lib/weight';
 
@@ -16,6 +15,8 @@ export const metadata: Metadata = { title: "How it's built", description: 'This 
 const stamp = build as BuildStamp;
 const w = weight as Weight | { measured: false };
 const version = siteVersion(new Date(stamp.time));
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const formatDay = (iso: string) => `${Number(iso.slice(8, 10))} ${MONTHS[Number(iso.slice(5, 7)) - 1]} ${iso.slice(0, 4)}`;
 const kb = (n: number) => `${(n / 1024).toFixed(1)} KB`;
 
 const decisions = [
@@ -35,7 +36,7 @@ export default function HowItsBuilt() {
         <p className="lede">Every number on this sheet comes from this build or from your own request. None of it is typed by hand.</p>
 
         <h2 className="section-h">1 · Your request, up close</h2>
-        <Blueprint stamp={stamp} siteVersion={version} variant="sheet" />
+        <Blueprint stamp={stamp} siteVersion={version} builtAt={formatBuilt(stamp.time)} variant="sheet" />
 
         <h2 className="section-h">2 · How it got here</h2>
         <p>{stamp.steps.join(' → ')}{stamp.runUrl ? <> · <a href={stamp.runUrl}>see the run</a></> : null}</p>
@@ -44,7 +45,7 @@ export default function HowItsBuilt() {
         <ol className="log">
           {stamp.commits.map((c) => (
             <li className="row" key={c.sha}>
-              <span className="v">{c.sha}</span><span>{c.subject}</span><span className="d">{formatMonth(c.time.slice(0, 7))}</span>
+              <span className="v">{c.sha}</span><span>{c.subject}</span><span className="d">{formatDay(c.time)}</span>
             </li>
           ))}
         </ol>

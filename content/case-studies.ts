@@ -17,7 +17,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'gfg-rkgit',
     title: 'GFG RKGIT platform',
-    problem: 'Our GFG Campus Body runs events, registrations and attendance for 300+ members. A club platform has to outlive the students who built it, so I made the browser untrusted: admin actions and form submissions go through one API that checks who you are, and Firestore rules limit what the browser can write directly.',
+    problem: 'Our GFG Campus Body runs events, registrations and attendance for 300+ members. A club platform has to outlive the students who built it, so I made the browser untrusted: admin actions go through one API that checks who you are, and Firestore rules limit what the browser can write directly.',
     drawing: {
       viewBox: '0 0 640 290',
       label: 'Three React apps (public site, admin portal, team portal) call one Cloudflare Worker API at api.gfg.rkgit.in, which uses Firestore with security rules, KV for token keys and rate limits, and R2 for media.',
@@ -41,7 +41,7 @@ export const caseStudies: CaseStudy[] = [
       { title: 'Rules for what the browser may write directly', file: 'gfg/firestore.rules', lang: 'js', source: 'gfg-rkgit-infra · firestore.rules', note: 'the repo has an emulator test suite for these rules' },
       { title: 'Access that expires on its own', file: 'gfg/revoke-scanner-access.js', lang: 'js', source: 'gfg-rkgit-worker · src/scheduled/revoke-scanner-access.js', note: 'a daily cron removes event-scanner access' },
     ],
-    results: ['Used by 300+ members of GFG Campus Body RKGIT', 'Form submissions through the Worker need a sign-in and are rate-limited per user: 3 feedback submissions per form and 1 career application a day', 'Admin actions need a token and an active admin record'],
+    results: ['Used by 300+ members of GFG Campus Body RKGIT', 'Admin actions need a token and an active admin record'],
     links: [],
   },
   {
@@ -77,11 +77,11 @@ export const caseStudies: CaseStudy[] = [
     problem: 'I wanted one small API with the full production path around it: tests on every push, a versioned Docker image on every tag, metrics, and error tracking.',
     drawing: {
       viewBox: '0 0 640 230',
-      label: 'git tag triggers GitHub Actions, which builds a Docker image, smoke-tests its health endpoint and pushes it to GHCR. The FastAPI app runs with async SQLAlchemy on PostgreSQL, exposes Prometheus metrics and reports errors to Sentry.',
+      label: 'git tag triggers GitHub Actions, which builds a Docker image and pushes it to GHCR. The FastAPI app runs with async SQLAlchemy on PostgreSQL, exposes Prometheus metrics and reports errors to Sentry.',
       boxes: [
         { x: 10, y: 20, w: 130, text: 'git tag v*' },
         { x: 165, y: 20, w: 140, text: 'GitHub Actions', dashed: true },
-        { x: 330, y: 20, w: 140, text: 'smoke /health' },
+        { x: 330, y: 20, w: 140, text: 'docker build' },
         { x: 495, y: 20, w: 135, text: 'GHCR image' },
         { x: 165, y: 150, w: 140, text: 'FastAPI app' },
         { x: 330, y: 150, w: 140, text: 'PostgreSQL' },
@@ -96,8 +96,8 @@ export const caseStudies: CaseStudy[] = [
       notes: [{ x: 40, y: 45, text: 'every tag is a deployable image' }],
     },
     excerpts: [
-      { title: 'A container that checks itself', file: 'prometheus/Dockerfile', lang: 'dockerfile', source: 'prometheus · Dockerfile', note: 'dependencies in their own cached layer, a non-root user and a /health check' },
-      { title: 'Release on tag', file: 'prometheus/release.yml', lang: 'yaml', source: 'prometheus · .github/workflows/release.yml', note: 'smoke-tests the container before pushing' },
+      { title: 'A lean, non-root container', file: 'prometheus/Dockerfile', lang: 'dockerfile', source: 'prometheus · Dockerfile', note: 'dependencies in their own cached layer, and a non-root user' },
+      { title: 'Release on tag', file: 'prometheus/release.yml', lang: 'yaml', source: 'prometheus · .github/workflows/release.yml', note: 'a version tag triggers the build and push to GHCR' },
       { title: 'Metrics and errors wired in', file: 'prometheus/main.py', lang: 'python', source: 'prometheus · app/main.py', note: 'Prometheus metrics wired into the app; Sentry starts when a DSN is configured' },
     ],
     results: ['CI, CodeQL and a release workflow on GitHub Actions', 'Versioned images on GHCR', 'Deploy blueprint for Render included'],

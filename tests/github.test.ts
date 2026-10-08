@@ -37,3 +37,18 @@ describe('curated entries', () => {
     for (const e of entries) expect(e.date).toMatch(/^\d{4}-\d{2}(-\d{2})?$/);
   });
 });
+
+describe('loadRepos', () => {
+  it('falls back to the committed snapshot when github.json is missing', async () => {
+    const { mkdtempSync, writeFileSync } = await import('node:fs');
+    const { tmpdir } = await import('node:os');
+    const { join } = await import('node:path');
+    const { loadRepos } = await import('@/lib/github');
+    const dir = mkdtempSync(join(tmpdir(), 'gh-'));
+    const repo = { name: 'prometheus', stars: 1, pushedAt: '2026-08-14T04:23:55Z', url: 'https://github.com/witharyan/prometheus' };
+    writeFileSync(join(dir, 'github-snapshot.json'), JSON.stringify([repo]));
+    expect(loadRepos(dir)).toEqual([repo]);
+    writeFileSync(join(dir, 'github.json'), JSON.stringify([{ ...repo, stars: 5 }]));
+    expect(loadRepos(dir)[0].stars).toBe(5);
+  });
+});

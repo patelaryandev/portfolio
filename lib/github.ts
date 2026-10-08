@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 
 export type RepoInfo = { name: string; stars: number; pushedAt: string; url: string };
 
@@ -16,6 +16,8 @@ export function attachRepos<T extends { repo?: string }>(entries: T[], repos: Re
   return entries.map((e) => ({ ...e, github: repos.find((r) => r.name === e.repo) ?? null }));
 }
 
-export function loadRepos(): RepoInfo[] {
-  return JSON.parse(readFileSync('content/github.json', 'utf8')) as RepoInfo[];
+export function loadRepos(dir = 'content'): RepoInfo[] {
+  const live = `${dir}/github.json`;
+  const file = existsSync(live) ? live : `${dir}/github-snapshot.json`;
+  return JSON.parse(readFileSync(file, 'utf8')) as RepoInfo[];
 }

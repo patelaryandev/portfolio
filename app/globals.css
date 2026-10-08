@@ -43,9 +43,12 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 @media (max-width: 420px) { .stage { zoom: .82; } }
 .stage svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .pkt { position: absolute; left: 0; top: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); opacity: 0;
-  offset-path: path('M 82 66 L 82 126 M 82 166 L 82 226'); offset-rotate: 0deg; animation: visit 5.5s .6s infinite both; }
-.pkt.t1 { width: 9px; height: 9px; background: #CF7A55; animation-delay: .66s; }
-.pkt.t2 { width: 6px; height: 6px; background: #E3AE95; animation-delay: .72s; }
+  offset-path: path('M 82 66 L 82 126 M 82 166 L 82 226'); offset-rotate: 0deg; }
+.blueprint.mounted .pkt { animation: visit 5.5s .6s infinite both; }
+.pkt.t1 { width: 9px; height: 9px; background: #CF7A55; }
+.pkt.t2 { width: 6px; height: 6px; background: #E3AE95; }
+.blueprint.mounted .pkt.t1 { animation-delay: .66s; }
+.blueprint.mounted .pkt.t2 { animation-delay: .72s; }
 @keyframes visit {
   0%        { offset-distance: 0%;    opacity: 0; transform: scale(.4); animation-timing-function: ease-out; }
   3%        { offset-distance: 2%;    opacity: 1; transform: scale(1);  animation-timing-function: cubic-bezier(.55,0,1,.45); }
@@ -56,18 +59,23 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
   35%       { offset-distance: 100%;  opacity: 1; transform: scale(1); }
   38%, 100% { offset-distance: 100%;  opacity: 0; transform: scale(0); }
 }
-.ripple { position: absolute; left: 76px; top: 220px; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--accent); opacity: 0; animation: ripple 5.5s ease-out .6s infinite both; }
+.ripple { position: absolute; left: 76px; top: 220px; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--accent); opacity: 0; }
+.blueprint.mounted .ripple { animation: ripple 5.5s ease-out .6s infinite both; }
 @keyframes ripple { 0%, 34.5% { transform: scale(.6); opacity: 0; } 35% { transform: scale(.6); opacity: .9; } 48%, 100% { transform: scale(3.2); opacity: 0; } }
-.blueprint .edge { animation: edge 5.5s linear .6s infinite; }
-.blueprint .dest { animation: dest 5.5s linear .6s infinite; }
+.blueprint.mounted .edge { animation: edge 5.5s linear .6s infinite; }
+.blueprint.mounted .dest { animation: dest 5.5s linear .6s infinite; }
 @keyframes edge { 0%, 15.5% { stroke: #24272A; } 17% { stroke: #B23A0A; } 23%, 100% { stroke: #24272A; } }
 @keyframes dest { 0%, 34.5% { stroke: #24272A; stroke-width: 1.4; } 36% { stroke: #B23A0A; stroke-width: 2.4; } 47%, 100% { stroke: #24272A; stroke-width: 1.4; } }
 .blueprint.offscreen :is(.pkt, .ripple, .edge, .dest) { animation-play-state: paused; }
 .blueprint.is-down :is(.pkt, .ripple) { display: none; }
 .blueprint.is-down :is(.edge, .dest) { animation: none; }
+@media (scripting: none) {
+  .pkt, .ripple { display: none; }
+  .blueprint.blueprint :is(.edge, .dest) { animation: none; }
+}
 @media (prefers-reduced-motion: reduce) {
   .pkt, .ripple { display: none; }
-  .blueprint :is(.edge, .dest) { animation: none; }
+  .blueprint.blueprint :is(.edge, .dest) { animation: none; }
 }
 .note-ms { position: absolute; left: 96px; top: 182px; transform: rotate(-4deg); font-size: 26px; }
 .facts { font-size: 13px; margin: 8px 0 24px; display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; color: var(--body); }
@@ -92,6 +100,8 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 .excerpt:has(details[open]) .code { max-height: none; }
 .excerpt details { border-top: 1px solid var(--rule); padding: 8px 14px; font-size: 13px; }
 .excerpt summary { cursor: pointer; color: var(--accent); }
+.excerpt summary .less, .excerpt details[open] summary .more { display: none; }
+.excerpt details[open] summary .less { display: inline; }
 
 .drawing { position: relative; border: 1px solid var(--ink); padding: 16px; overflow-x: auto; }
 .drawing svg { display: block; min-width: 600px; width: 100%; height: auto; }
