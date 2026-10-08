@@ -88,3 +88,6 @@ graphify-out/
 /*.jpg
 /*.png
 /.jpeg
+
+# Private, separately versioned project docs (own git repo, never pushed)
+/project-docs/
