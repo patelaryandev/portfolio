@@ -41,6 +41,7 @@
     "worker",
     "design-preview",
     "project-docs",
-    "out"
+    "out",
+    "content/excerpts"
   ]
 }

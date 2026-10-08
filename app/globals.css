@@ -82,3 +82,21 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
   .blueprint { padding: 24px 18px 0; }
   .blueprint .tblock { margin: auto -18px 0; }
 }
+
+.excerpt { margin: 28px 0; border: 1px solid var(--ink); background: #FBFAF6; }
+.excerpt figcaption { padding: 10px 14px; border-bottom: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
+.excerpt-note { font-size: 22px; flex-basis: 100%; }
+.code pre { margin: 0; padding: 12px 14px; overflow-x: auto; font-size: 13px; line-height: 1.6; background: transparent !important; }
+.code code { font-family: var(--font-mono), monospace; }
+.excerpt:has(details) .code { max-height: calc(12 * 1.6 * 13px + 24px); overflow: hidden; }
+.excerpt:has(details[open]) .code { max-height: none; }
+.excerpt details { border-top: 1px solid var(--rule); padding: 8px 14px; font-size: 13px; }
+.excerpt summary { cursor: pointer; color: var(--accent); }
+
+.drawing { position: relative; border: 1px solid var(--ink); padding: 16px; overflow-x: auto; }
+.drawing svg { display: block; min-width: 600px; width: 100%; height: auto; }
+.drawing-note { position: absolute; transform: rotate(-3deg); font-size: 24px; white-space: nowrap; }
+@media (max-width: 1000px) {
+  .drawing::before { content: "swipe the drawing →"; display: block; position: sticky; left: 0; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .drawing-note { position: static; display: block; transform: none; margin-top: 8px; white-space: normal; }
+}

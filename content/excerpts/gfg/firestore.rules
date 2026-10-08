@@ -1,0 +1,61 @@
+// Security Model:
+// - Public/unauthenticated users: read-only access to active public data
+// - Team members (authenticated, in team_members collection): self-service profile updates only
+// - Admin users (in admin-users collection): full management access
+// … cut: club handoff notes
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Returns the role string from the caller's admin-users document, or null.
+    function getUserRole() {
+      return exists(/databases/$(database)/documents/admin-users/$(request.auth.uid))
+        ? get(/databases/$(database)/documents/admin-users/$(request.auth.uid)).data.role
+        : null;
+    }
+
+    // True if the caller is authenticated AND has an active admin-users record.
+    function isActiveAdmin() {
+      return request.auth != null &&
+             exists(/databases/$(database)/documents/admin-users/$(request.auth.uid)) &&
+             get(/databases/$(database)/documents/admin-users/$(request.auth.uid)).data.isActive == true;
+    }
+
+    // True if the caller is super_admin.
+    function isSuperAdmin() {
+      return isActiveAdmin() && getUserRole() == 'super_admin';
+    }
+
+    // … cut: the other role helpers
+
+    // Fields a team member may self-update. Admin update has no field restriction.
+    // blockedFields are admin-only fields.
+    function onlyMemberEditableFields() {
+      let allowedFields = ['bio', 'skills', 'achievements', 'qualifications', 'social', 'socialLinks', 'image', 'imageUrl', 'currentProjects', 'lastProfileUpdate', 'profileCompleteness', 'updatedAt', 'lastEditedBy'];
+      let blockedFields = ['role', 'department', 'priority', 'isActive', 'isAlumni', 'memberType', 'userId', 'joiningYear', 'graduationYear', 'name', 'email'];
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(allowedFields)
+          && !request.resource.data.diff(resource.data).affectedKeys().hasAny(blockedFields)
+          // Array size limits — prevents document bloat toward 1MB hard limit
+          && (!('skills' in request.resource.data) || request.resource.data.skills.size() <= 50)
+          && (!('achievements' in request.resource.data) || request.resource.data.achievements.size() <= 50)
+          && (!('currentProjects' in request.resource.data) || request.resource.data.currentProjects.size() <= 20)
+          // bio size cap — client (ProfileEdit.jsx) also enforces 500, but that's
+          // only UI-level; this is the actual unbypassable limit since profile
+          // saves write directly from the client SDK, not through the Worker.
+          && (!('bio' in request.resource.data) || request.resource.data.bio is string && request.resource.data.bio.size() <= 500);
+    }
+
+    // … cut: admin-users, events and team collections
+
+    // feedback — Anyone can submit (with document size limit). Admins read. No update or delete (data integrity).
+    match /feedback/{feedbackId} {
+      allow create: if request.resource.data.size() < 10000;
+      allow read: if canViewData();
+      allow update: if false;
+      allow delete: if false;
+    }
+
+
+    // … cut: remaining collections
+  }
+}
