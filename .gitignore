@@ -91,3 +91,8 @@ graphify-out/
 
 # Private, separately versioned project docs (own git repo, never pushed)
 /project-docs/
+
+# Generated at build time
+/content/build.json
+/content/weight.json
+/content/github.json

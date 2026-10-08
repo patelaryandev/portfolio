@@ -1,12 +1,13 @@
-# aryan-portfolio
+# witharyan
 
-Personal portfolio of Aryan Patel, web developer and DevOps engineer. Built with Next.js, deployed on Cloudflare.
+Personal portfolio of Aryan Patel, live at https://witharyan.tech. Next.js static export served by one Cloudflare Worker.
 
-The site is in the design phase. Design sketches live in `design-preview/` and deploy to a separate Cloudflare Pages project.
+## Run it
 
-## Deploy the design preview
+    npm install
+    npm run build      # stamps the build, builds twice to measure page weight, checks the output
+    npm test
+    npx wrangler dev   # local Worker with the live panel
+    npx wrangler deploy
 
-```sh
-cd design-preview
-npx wrangler pages deploy
-```
+`design-preview/` holds the static sketches from the design phase.
