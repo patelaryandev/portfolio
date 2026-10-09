@@ -44,33 +44,40 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 
 .blueprint { padding: 28px 28px 0; position: relative; display: flex; flex-direction: column; }
 .bp-title { font-family: var(--font-serif), serif; font-weight: 400; font-size: 24px; letter-spacing: -.01em; }
-.bp-sub { font-size: 13px; color: var(--body); margin-top: 2px; }
-.stage { position: relative; width: 340px; height: 330px; margin-top: 18px; }
-@media (max-width: 420px) { .stage { zoom: .82; } }
-.stage svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.pkt { position: absolute; left: 0; top: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); opacity: 0;
-  offset-path: path('M 82 66 L 82 126 M 82 166 L 82 226'); offset-rotate: 0deg; }
+.bp-plain { font-size: 15px; line-height: 1.45; color: var(--ink); margin-top: 6px; max-width: 34ch; }
+.bp-sub { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+.stage { position: relative; width: 100%; max-width: 360px; margin-top: 16px; }
+.stage svg { display: block; width: 100%; height: auto; overflow: visible; }
+.stage .diag text { font-size: 14px; }
+.stage .diag .sub, .stage .diag .al { font-size: 11px; }
+/* boxes that open something look like the site's buttons: a hard shadow, and they lift on hover */
+.diag a.hit { cursor: pointer; }
+.diag a.hit .lift { transition: transform .12s ease; }
+.diag a.hit .face { fill: #FBFAF6; stroke-width: 1.6; }
+.diag a.hit:hover .lift, .diag a.hit:focus-visible .lift { transform: translate(-2px, -2px); }
+.diag a.hit:hover .face, .diag a.hit:focus-visible .face { stroke: var(--accent); }
+.diag a.hit:hover .sub, .diag a.hit:focus-visible .sub { fill: var(--accent); }
+.diag a.hit:focus-visible { outline: none; }
+.diag a.hit:focus-visible .face { stroke-width: 2.4; }
+/* the dot is the page leaving the Cloudflare edge and landing in your browser */
+.pkt { fill: var(--accent); stroke: none; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.pkt.t1 { fill: #CF7A55; }
+.pkt.t2 { fill: #E3AE95; }
 .blueprint.mounted .pkt { animation: visit 5.5s .6s infinite both; }
-.pkt.t1 { width: 9px; height: 9px; background: #CF7A55; }
-.pkt.t2 { width: 6px; height: 6px; background: #E3AE95; }
 .blueprint.mounted .pkt.t1 { animation-delay: .66s; }
 .blueprint.mounted .pkt.t2 { animation-delay: .72s; }
 @keyframes visit {
-  0%        { offset-distance: 0%;    opacity: 0; transform: scale(.4); animation-timing-function: ease-out; }
-  3%        { offset-distance: 2%;    opacity: 1; transform: scale(1);  animation-timing-function: cubic-bezier(.55,0,1,.45); }
-  16%       { offset-distance: 50%;   opacity: 1; }
-  16.5%     { offset-distance: 50%;   opacity: 0; }
-  19%       { offset-distance: 50%;   opacity: 0; }
-  19.5%     { offset-distance: 50.5%; opacity: 1; animation-timing-function: cubic-bezier(0,.55,.45,1); }
-  35%       { offset-distance: 100%;  opacity: 1; transform: scale(1); }
-  38%, 100% { offset-distance: 100%;  opacity: 0; transform: scale(0); }
+  0%        { transform: translateY(0) scale(.4); opacity: 0; animation-timing-function: ease-out; }
+  3%        { transform: translateY(1px) scale(1); opacity: 1; animation-timing-function: cubic-bezier(.45,0,.35,1); }
+  35%       { transform: translateY(52px) scale(1); opacity: 1; }
+  38%, 100% { transform: translateY(52px) scale(0); opacity: 0; }
 }
-.ripple { position: absolute; left: 76px; top: 220px; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--accent); opacity: 0; }
+.ripple { opacity: 0; transform-box: fill-box; transform-origin: center; }
 .blueprint.mounted .ripple { animation: ripple 5.5s ease-out .6s infinite both; }
 @keyframes ripple { 0%, 34.5% { transform: scale(.6); opacity: 0; } 35% { transform: scale(.6); opacity: .9; } 48%, 100% { transform: scale(3.2); opacity: 0; } }
 .blueprint.mounted .edge { animation: edge 5.5s linear .6s infinite; }
 .blueprint.mounted .dest { animation: dest 5.5s linear .6s infinite; }
-@keyframes edge { 0%, 15.5% { stroke: #24272A; } 17% { stroke: #B23A0A; } 23%, 100% { stroke: #24272A; } }
+@keyframes edge { 0% { stroke: #B23A0A; stroke-width: 2.4; } 8%, 100% { stroke: #24272A; stroke-width: 1.4; } }
 @keyframes dest { 0%, 34.5% { stroke: #24272A; stroke-width: 1.4; } 36% { stroke: #B23A0A; stroke-width: 2.4; } 47%, 100% { stroke: #24272A; stroke-width: 1.4; } }
 .blueprint.offscreen :is(.pkt, .ripple, .edge, .dest) { animation-play-state: paused; }
 .blueprint.is-down :is(.pkt, .ripple) { display: none; }
@@ -79,15 +86,16 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
   .pkt, .ripple { display: none; }
   .blueprint.blueprint :is(.edge, .dest) { animation: none; }
 }
-@media (max-width: 340px) { .cta { flex-wrap: wrap; } }
 @media (prefers-reduced-motion: reduce) {
   .pkt, .ripple { display: none; }
   .blueprint.blueprint :is(.edge, .dest) { animation: none; }
+  .diag a.hit .lift { transition: none; }
 }
-.note-ms { position: absolute; left: 96px; top: 182px; transform: rotate(-4deg); font-size: 26px; }
+/* sits on the last arrow, after "round trip" (x 140, y 262 of 340 x 344) */
+.note-ms { position: absolute; left: 41%; top: 72%; transform: rotate(-4deg); font-size: 26px; }
 .facts { font-size: 13px; margin: 8px 0 24px; display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; color: var(--body); }
 .facts dd { font-family: var(--font-mono), monospace; font-size: 12px; color: var(--ink); margin: 0; }
-.blueprint .tblock { margin: auto -28px 0; }
+.blueprint .tblock { margin: auto -28px 0; grid-auto-columns: 1fr; }
 .bench { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 4px 0 12px; }
 .bench button { font: inherit; font-size: 13px; padding: 6px 12px; border: 1.5px solid var(--ink); background: var(--paper); cursor: pointer; }
 .bench button:disabled { opacity: .5; cursor: default; }
@@ -102,7 +110,7 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 .decision h3 { font-family: var(--font-serif), serif; font-weight: 400; font-size: 22px; line-height: 1.2; }
 .decision h3 .mono { font-size: 13px; color: var(--accent); margin-right: 6px; vertical-align: 3px; }
 .decision p { margin-top: 8px; max-width: 68ch; }
-.decision .gh { display: inline-block; margin-top: 8px; font-size: 14px; }
+.decision .gh { margin-top: 10px; }
 .excerpt { margin-top: 12px; border: 1px solid var(--ink); background: #FBFAF6; }
 .excerpt summary { cursor: pointer; padding: 10px 14px; font-size: 14px; font-weight: 500; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
 .excerpt summary::before { content: "+"; font-family: var(--font-mono), monospace; color: var(--accent); }
@@ -132,7 +140,7 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 .home .panel { border-left: 1.5px solid var(--ink); display: flex; }
 .home .panel-in { flex: 1; display: flex; flex-direction: column; min-width: 0; }
 .home .panel .blueprint { flex: 1; }
-.more { margin-top: 16px; font-size: 14px; }
+.more { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
 .about { margin-top: 48px; max-width: 60ch; }
 .about h2 { font-family: var(--font-serif), serif; font-weight: 400; font-size: 24px; }
 .about p { margin-top: 10px; color: var(--body); }
@@ -180,7 +188,6 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 
 /* ---- home: profile, chips, buttons ---- */
 .live { margin-top: 18px; }
-.live a { font-family: var(--font-mono), monospace; font-size: 13px; }
 .profile { border: 1.5px solid var(--ink); }
 .profile-head { display: flex; gap: 14px; align-items: center; padding: 16px; border-bottom: 1.5px solid var(--ink); background: var(--paper); }
 .profile-head img { width: 96px; height: 96px; border: 1.5px solid var(--ink); flex: none; object-fit: cover; display: block; }
@@ -214,10 +221,7 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 .cv small { font-family: var(--font-mono), monospace; font-size: 11px; color: var(--muted); }
 
 .kicker { font-family: var(--font-mono), monospace; font-size: 12px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-top: 48px; display: flex; justify-content: space-between; align-items: baseline; }
-.kicker a { text-transform: none; letter-spacing: 0; font-family: var(--font-sans), sans-serif; font-size: 14px; font-weight: 500; color: var(--ink); padding: 4px 0; transition: color .12s; }
-.kicker a .arr { display: inline-block; transition: transform .12s ease; }
-.kicker a:hover, .kicker a:focus-visible { color: var(--accent); }
-.kicker a:hover .arr, .kicker a:focus-visible .arr { transform: translateX(4px); }
+.kicker a { text-transform: none; letter-spacing: 0; font-family: var(--font-sans), sans-serif; }
 
 .cards { list-style: none; padding: 0; margin-top: 12px; display: grid; gap: 14px; }
 .card { position: relative; display: grid; grid-template-columns: 220px 1fr; border: 1.5px solid var(--ink); background: var(--paper); transition: transform .14s ease, box-shadow .14s ease; }
@@ -249,6 +253,24 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 .log.hover .row:has(a.stretch):hover { background: #E9E5DA; }
 .log.hover .row a.stretch::after { content: ""; position: absolute; inset: 0; }
 .log.hover .row a.above { position: relative; z-index: 1; }
+/* a whole row opens the project: the title reads as the link, and the arrow nudges on hover */
+.log a.stretch { font-weight: 600; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.log a.stretch .arr { display: inline-block; color: var(--accent); transition: transform .12s ease; }
+.log .row:hover a.stretch .arr, .log a.stretch:focus-visible .arr { transform: translateX(3px); }
+.log .row:hover a.stretch { color: var(--accent); }
+
+/* ---- small link buttons: back links, "Every release", Live site, Code, View on GitHub ----
+   Same shape as the menu and the main buttons, so anything boxed on this site is something you can press. */
+.top a, .kicker a, .live a, .more a, .decision .gh, .card .foot .ext, .log a.above {
+  display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border: 1.5px solid var(--ink); background: #FBFAF6;
+  font-size: 13px; font-weight: 500; color: var(--ink); text-decoration: none; line-height: 1; white-space: nowrap;
+  transition: transform .12s ease, box-shadow .12s ease; }
+:is(.top a, .kicker a, .live a, .more a, .decision .gh, .card .foot .ext, .log a.above):hover,
+:is(.top a, .kicker a, .live a, .more a, .decision .gh, .card .foot .ext, .log a.above):focus-visible { transform: translate(-2px, -2px); box-shadow: 3px 3px 0 var(--ink); }
+:is(.top a, .kicker a, .live a, .more a, .decision .gh, .card .foot .ext, .log a.above):active { transform: none; box-shadow: none; }
+.log a.above { height: 26px; padding: 0 8px; font-size: 12px; margin-left: 10px; vertical-align: 1px; }
+.log a.above .stars { color: var(--muted); font-family: var(--font-mono), monospace; font-size: 11px; margin-left: 2px; }
+.live a { white-space: normal; height: auto; min-height: 32px; padding: 6px 12px; }
 
 /* ---- richer drawings ---- */
 .diag .sub { font-family: var(--font-mono), monospace; font-size: 10.5px; fill: var(--muted); }
@@ -271,10 +293,20 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
   .home .panel .stage { margin-top: 10px; }
   .home .panel .facts { margin-bottom: 12px; }
 }
-/* on screens wider than the page, carry the grid paper out to the right edge */
+/* On screens wider than the page, the space right of the panel becomes the margin of a drawing sheet:
+   a frame line, zone letters, a centre mark and the sheet id, with the grid paper fading out.
+   It hangs off the sticky panel, so it moves exactly with it instead of scrolling past it. */
+.sheet-edge { display: none; }
 @media (min-width: 1181px) {
   body { overflow-x: clip; }
-  .home .panel::after { content: ""; position: absolute; top: 0; bottom: 0; left: 100%; width: calc((100vw - 1180px) / 2); background: inherit; }
+  .sheet-edge { display: block; position: absolute; top: 0; bottom: 0; left: 100%; width: calc((100vw - 1180px) / 2); overflow: hidden; pointer-events: none; border-left: 1.5px solid var(--ink); }
+  .sheet-edge::before { content: ""; position: absolute; inset: 0 0 0 28px; background-color: var(--grid); background-image: linear-gradient(#24272a12 1px, transparent 1px), linear-gradient(90deg, #24272a12 1px, transparent 1px); background-size: 20px 20px;
+    -webkit-mask-image: linear-gradient(90deg, #000, transparent 220px); mask-image: linear-gradient(90deg, #000, transparent 220px); }
+  .sheet-edge::after { content: ""; position: absolute; top: 50%; left: 0; width: 44px; border-top: 1.5px solid var(--ink); }
+  .zones { list-style: none; padding: 0; position: absolute; top: 0; bottom: 0; left: 0; width: 28px; display: flex; flex-direction: column; border-right: 1px solid var(--ink); background: var(--paper); }
+  .zones li { flex: 1; display: grid; place-items: center; font-family: var(--font-mono), monospace; font-size: 11px; color: var(--muted); }
+  .zones li + li { border-top: 1px solid var(--rule); }
+  .sheet-id { position: absolute; left: 40px; bottom: 28px; writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--font-mono), monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
 }
 
 @media (max-width: 1000px) {
@@ -310,6 +342,6 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 }
 @media (max-width: 340px) { .cta { flex-wrap: wrap; } }
 @media (prefers-reduced-motion: reduce) {
-  .btn, .card, .nav ul a, .kicker a .arr, .card .go i span { transition: none; }
-  .btn:hover, .card:hover, .card:focus-within, .nav ul a:hover, .nav ul a:focus-visible, .kicker a:hover .arr, .card:hover .go i span, .card:focus-within .go i span { transform: none; }
+  .btn, .card, .nav ul a, .card .go i span, .log a.stretch .arr, .top a, .kicker a, .live a, .more a, .decision .gh, .card .foot .ext, .log a.above { transition: none; }
+  .btn:hover, .card:hover, .card:focus-within, .nav ul a:hover, .nav ul a:focus-visible, .log .row:hover a.stretch .arr, .card:hover .go i span, .card:focus-within .go i span { transform: none; }
 }

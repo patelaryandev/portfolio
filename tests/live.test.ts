@@ -46,8 +46,8 @@ describe('timeRequest', () => {
 
 describe('fetchVisit', () => {
   it('returns colo and count', async () => {
-    const f = vi.fn().mockResolvedValue(Response.json({ colo: 'DEL', visitsToday: 3, build: {} }));
-    expect(await fetchVisit(f)).toEqual({ colo: 'DEL', visitsToday: 3 });
+    const f = vi.fn().mockResolvedValue(Response.json({ colo: 'DEL', visitsToday: 3, build: { tests: 97 } }));
+    expect(await fetchVisit(f)).toEqual({ colo: 'DEL', visitsToday: 3, tests: 97 });
   });
   it('returns null on bad JSON', async () => {
     expect(await fetchVisit(vi.fn().mockResolvedValue(new Response('<html>')))).toBeNull();

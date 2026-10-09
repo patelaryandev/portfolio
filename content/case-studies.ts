@@ -163,6 +163,6 @@ export const caseStudies: CaseStudy[] = [
       'The Sentry release step is still a placeholder. I\'d wire in sentry-cli so every error links to its release.',
     ],
     results: ['CI, CodeQL and a release workflow on GitHub Actions', 'Versioned images on GHCR', 'Deploy blueprint for Render included'],
-    links: [{ label: 'Source on GitHub', href: 'https://github.com/patelaryandev/prometheus' }],
+    links: [{ label: 'Source on GitHub ↗', href: 'https://github.com/patelaryandev/prometheus' }],
   },
 ];

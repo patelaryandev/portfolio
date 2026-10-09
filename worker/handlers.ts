@@ -14,7 +14,7 @@ export function handlePing(req: Request): Response {
 export async function handleVisit(
   req: Request,
   hit: (day: string) => Promise<number>,
-  build: { sha: string; time: string },
+  build: { sha: string; time: string; tests?: number | null },
   now = new Date(),
 ): Promise<Response> {
   if (req.method !== 'GET') return json({ error: 'method not allowed' }, 405, { allow: 'GET' });

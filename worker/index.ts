@@ -15,7 +15,7 @@ export default {
     if (pathname === '/api/ping') return handlePing(request);
     if (pathname === '/api/visit') {
       const counter = env.VISIT_COUNTER.get(env.VISIT_COUNTER.idFromName('global'));
-      return handleVisit(request, (day) => counter.hit(day), { sha: build.sha, time: build.time });
+      return handleVisit(request, (day) => counter.hit(day), { sha: build.sha, time: build.time, tests: (build as { tests?: number | null }).tests ?? null });
     }
     if (pathname.startsWith('/api/')) return notFound();
     return env.ASSETS.fetch(request);

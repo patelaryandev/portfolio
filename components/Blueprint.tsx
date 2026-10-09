@@ -1,9 +1,9 @@
 // components/Blueprint.tsx
 'use client';
 import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
-import type { BuildStamp } from '@/lib/stamp';
+import { aboutMinutes, type BuildStamp } from '@/lib/stamp';
 import { LAND_MS, fetchVisit, initialLive, liveReducer, timeRequest } from '@/lib/live';
-import { DeployColumn } from './DeployColumn';
+import { Flow } from './Flow';
 import { TitleBlock } from './TitleBlock';
 
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -12,7 +12,7 @@ export function Blueprint({ stamp, siteVersion, builtAt, variant = 'panel' }: { 
   const [live, dispatch] = useReducer(liveReducer, initialLive);
   const [mounted, setMounted] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
-  const dotRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<SVGCircleElement>(null);
   const alive = useRef(true);
 
   const round = useCallback(async (land: boolean) => {
@@ -42,26 +42,24 @@ export function Blueprint({ stamp, siteVersion, builtAt, variant = 'panel' }: { 
 
   const down = live.status === 'down';
   const colo = live.colo ?? 'edge';
+  const soon = aboutMinutes(stamp.deploySeconds);
 
   return (
-    <div ref={rootRef} className={`blueprint grid ${variant} ${down ? 'is-down' : ''} ${mounted ? 'mounted' : ''}`}>
+    <div ref={rootRef} className={`blueprint grid bp-${variant} ${down ? 'is-down' : ''} ${mounted ? 'mounted' : ''}`}>
       <h2 className="bp-title">How this page reached you</h2>
+      <p className="bp-plain">This site deploys itself: every push is tested, then goes live {soon ? `in ${soon}` : 'on its own'}.</p>
       <p className="bp-sub">{down ? 'Live data unavailable right now.' : live.status === 'live' ? 'Live. Measured on your visit, not a picture.' : 'Connecting…'}</p>
       <div className="stage">
-        <svg className="diag" viewBox="0 0 340 330" fill="none" stroke="var(--blue-ink)" strokeWidth="1.4" role="img"
-          aria-label={`Your browser, then Cloudflare ${colo}, then the site files on a Worker. Deploys: ${stamp.steps.join(', then ')}.`}>
+        <svg className="diag" viewBox="0 0 340 344" fill="none" stroke="var(--blue-ink)" strokeWidth="1.4" role="group"
+          aria-label={`My push, then ${stamp.via === 'github-actions' ? 'GitHub Actions' : 'wrangler deploy'}, then Cloudflare ${colo}, then your browser.`}>
           <defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8" fill="none" stroke="var(--blue-ink)" /></marker></defs>
-          <text x="12" y="14">your visit</text><text x="196" y="14">my deploys</text>
-          <rect x="12" y="26" width="140" height="40" fill="var(--paper)" /><text x="26" y="51">Your browser</text>
-          <rect className="edge" x="12" y="126" width="140" height="40" fill="var(--paper)" strokeWidth="2" /><text x="26" y="151">Cloudflare · {colo}</text>
-          <rect className="dest" x="12" y="226" width="140" height="40" fill="var(--paper)" /><text x="20" y="251">Site files (Worker)</text>
-          <path d="M82 66 V126" markerEnd="url(#ar)" /><path d="M82 166 V226" markerEnd="url(#ar)" />
-          <DeployColumn steps={stamp.steps} />
-          <text x="328" y="300" textAnchor="end">built {builtAt}</text>
+          <Flow stamp={stamp} colo={colo} tests={live.tests} />
+          <circle className="ripple" cx="44" cy="296" r="6" stroke="var(--accent)" strokeWidth="1.5" aria-hidden="true" />
+          <circle className="pkt t2" cx="44" cy="244" r="3" aria-hidden="true" />
+          <circle className="pkt t1" cx="44" cy="244" r="4.5" aria-hidden="true" />
+          <circle className="pkt" cx="44" cy="244" r="6" ref={dotRef} aria-hidden="true" />
         </svg>
-        <div className="pkt t2" aria-hidden="true" /><div className="pkt t1" aria-hidden="true" />
-        <div className="pkt" ref={dotRef} aria-hidden="true" /><div className="ripple" aria-hidden="true" />
-        <div className="pen note-ms" aria-hidden="true">{live.ms !== null ? `← ${live.ms} ms` : ''}</div>
+        <div className="pen note-ms" aria-hidden="true">{live.ms !== null ? `${live.ms} ms` : ''}</div>
       </div>
       {variant === 'sheet' ? (
         <div className="bench">
@@ -77,8 +75,8 @@ export function Blueprint({ stamp, siteVersion, builtAt, variant = 'panel' }: { 
       ) : null}
       <dl className="facts">
         <dt>Last deploy</dt><dd>{builtAt}, from {stamp.branch}</dd>
+        <dt>Push to live</dt><dd>{stamp.deploySeconds ? `${stamp.deploySeconds} s, typical of the last 10` : '–'}</dd>
         <dt>Visits today</dt><dd>{live.visitsToday?.toLocaleString('en-IN') ?? '–'}</dd>
-        <dt>Pipeline</dt><dd>{stamp.steps.join(' → ')}</dd>
       </dl>
       <TitleBlock cells={[
         { label: 'Revision', value: siteVersion },

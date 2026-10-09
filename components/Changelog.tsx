@@ -10,8 +10,9 @@ export function Changelog({ items, showPens = false }: { items: Item[]; showPens
   return (
     <ol className="log hover">
       {items.map((e) => {
-        const title = e.page ? <Link className="stretch" href={`/work/${e.page}`}>{e.title}</Link>
-          : e.url ? <a className="stretch" href={e.url}>{e.title}</a>
+        const arrow = <span className="arr" aria-hidden="true">{e.page ? ' →' : ' ↗'}</span>;
+        const title = e.page ? <Link className="stretch" href={`/work/${e.page}`}>{e.title}{arrow}</Link>
+          : e.url ? <a className="stretch" href={e.url}>{e.title}{arrow}</a>
           : e.title;
         return (
           <li className="row" key={e.id}>
@@ -19,7 +20,7 @@ export function Changelog({ items, showPens = false }: { items: Item[]; showPens
             <span>
               {title}: {e.summary}
               {showPens && e.pen ? <span className="pen row-pen">← {e.pen}</span> : null}
-              {e.github ? <> · <a className="above" href={e.github.url}>code</a>{e.github.stars > 0 ? ` ★ ${e.github.stars}` : ''}</> : null}
+              {e.github ? <a className="above" href={e.github.url}>Code ↗{e.github.stars > 0 ? <span className="stars">★ {e.github.stars}</span> : null}</a> : null}
             </span>
             <span className="d">{e.status === 'current' ? 'current' : formatMonth(e.date)}</span>
           </li>

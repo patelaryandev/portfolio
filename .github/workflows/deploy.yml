@@ -42,7 +42,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - run: npm run typecheck
-      - run: npm test
+      - run: npm test -- --reporter=default --reporter=json --outputFile.json=test-results/vitest.json
+
+      # Only reached when every test passed; the blueprint shows the count from the Worker's /api/visit.
+      - run: node scripts/stamp-tests.ts
 
       # The Worker bundles content/build.json, so it travels with the built site.
       - uses: actions/upload-artifact@v4

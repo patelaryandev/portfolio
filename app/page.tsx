@@ -33,6 +33,9 @@ const jsonLd = {
 };
 const version = siteVersion(new Date(stamp.time));
 
+// Drawing-sheet zones run top to bottom and skip I and O, as on an ISO 5457 sheet.
+const ZONES = ['A', 'B', 'C', 'D', 'E', 'F'];
+
 export default function Home() {
   const all = withVersions(entries);
   const cardIds: string[] = cards.map((c) => c.id);
@@ -63,6 +66,11 @@ export default function Home() {
         <div className="panel-in">
           <Profile />
           <Blueprint stamp={stamp} siteVersion={version} builtAt={formatBuilt(stamp.time)} />
+          {/* wide screens: the right margin of a drawing sheet (zone letters, centre mark, sheet id), pinned with the panel */}
+          <div className="sheet-edge" aria-hidden="true">
+            <ol className="zones">{ZONES.map((z) => <li key={z}>{z}</li>)}</ol>
+            <span className="sheet-id">patelaryan.dev · sheet 1 of 1 · rev {version}</span>
+          </div>
         </div>
       </aside>
     </main>

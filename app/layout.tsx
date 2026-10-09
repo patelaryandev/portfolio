@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://patelaryan.dev'),
   title: { default: 'Aryan Patel · Full-Stack & DevOps Engineer', template: '%s · Aryan Patel' },
   description: 'Full-Stack & DevOps Engineer. I build web apps in React and the pipelines that put them in production. Vice President, GFG Campus Body RKGIT.',
-  openGraph: { type: 'website', url: 'https://patelaryan.dev', siteName: 'patelaryan.dev', images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Aryan Patel, Full-Stack & DevOps Engineer' }] },
+  openGraph: { type: 'website', url: 'https://patelaryan.dev', siteName: 'patelaryan.dev', images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Aryan Patel. I build web apps and ship them.' }] },
   twitter: { card: 'summary_large_image', images: ['/og.png'] },
   alternates: { canonical: './' },
 };
