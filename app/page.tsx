@@ -13,6 +13,24 @@ import { siteVersion, withVersions } from '@/lib/version';
 import { Nav } from '@/components/Nav';
 
 const stamp = build as BuildStamp;
+
+// Tells Google and AI search who this site is about, and which profiles are the same person.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person', '@id': 'https://patelaryan.dev/#me',
+      name: site.name, url: 'https://patelaryan.dev', image: 'https://patelaryan.dev/aryan-patel.jpg',
+      jobTitle: site.title, description: site.lede, email: `mailto:${site.email}`,
+      address: { '@type': 'PostalAddress', addressLocality: site.place, addressCountry: 'IN' },
+      affiliation: { '@type': 'CollegeOrUniversity', name: 'Raj Kumar Goel Institute of Technology (RKGIT)' },
+      memberOf: { '@type': 'Organization', name: 'GFG Campus Body RKGIT', url: 'https://gfg.rkgit.in' },
+      knowsAbout: site.stack,
+      sameAs: [site.github, site.linkedin],
+    },
+    { '@type': 'WebSite', '@id': 'https://patelaryan.dev/#site', url: 'https://patelaryan.dev', name: site.name, publisher: { '@id': 'https://patelaryan.dev/#me' } },
+  ],
+};
 const version = siteVersion(new Date(stamp.time));
 
 export default function Home() {
@@ -22,6 +40,7 @@ export default function Home() {
   const shipped = all.filter((e) => e.featured && !cardIds.includes(e.id));
   return (
     <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     <Nav />
     <main className="home wrap">
       <section className="left">

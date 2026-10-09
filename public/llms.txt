@@ -1,0 +1,19 @@
+# Aryan Patel
+
+> Full-Stack & DevOps Engineer in Ghaziabad, India. I build web apps in React and the pipelines that put them in production. Final-year B.Tech CSE student at RKGIT and Vice President of the GFG Campus Body RKGIT. Open to Full-Stack and DevOps roles.
+
+Email: hi@patelaryan.dev
+GitHub: https://github.com/patelaryandev
+LinkedIn: https://www.linkedin.com/in/aryan-patel-865572327/
+
+## Projects
+
+- [GFG RKGIT platform](https://patelaryan.dev/work/gfg-rkgit): the website and portals of the GFG Campus Body RKGIT, used by 300+ members. 3 React apps on one Cloudflare Worker API, with Firebase Auth, Firestore, KV and R2.
+- [Prometheus: Expense Tracker API](https://patelaryan.dev/work/prometheus): FastAPI and PostgreSQL with CI, tagged Docker releases on GHCR, Prometheus metrics and Sentry.
+- [Nivaran](https://patelaryan.dev/work/nivaran): civic issue reporting web app in React with Supabase and FCM push notifications.
+
+## More
+
+- [Every release](https://patelaryan.dev/work): every project and hackathon win, newest first.
+- [How it's built](https://patelaryan.dev/how-its-built): how this site is built and deployed on Cloudflare Workers.
+- [Resume (PDF)](https://patelaryan.dev/resume.pdf)
