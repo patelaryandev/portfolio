@@ -27,9 +27,9 @@ export default function Home() {
       <section className="left">
         <h1 className="name">{site.name},<br /><i>v{version}</i>, still shipping.</h1>
         <p className="lede">{site.lede}</p>
-        <Profile where="inline" />
         <ul className="chips" aria-label="What I work with">{site.stack.map((s) => <li key={s}>{s}</li>)}</ul>
         <Cta />
+        <Profile where="inline" />
         <h2 className="kicker"><span>Selected work</span></h2>
         <ProjectCards items={all.filter((e) => cardIds.includes(e.id))} pens={pens} />
         <h2 className="kicker"><span>Also shipped</span><Link href="/work">Every release <span className="arr">→</span></Link></h2>

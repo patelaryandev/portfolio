@@ -161,12 +161,13 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 .nav .brand { text-decoration: none; display: flex; align-items: baseline; gap: 10px; }
 .nav .brand b { font-weight: 500; }
 .nav .brand span { color: var(--muted); font-size: 13px; }
-.nav ul { list-style: none; padding: 0; display: flex; gap: 22px; align-items: center; }
-.nav ul a { text-decoration: none; padding: 6px 0; font-weight: 500; border-bottom: 2px solid transparent; transition: color .12s, border-color .12s; }
-.nav ul a:hover, .nav ul a:focus-visible { color: var(--accent); }
-.nav ul a[aria-current] { border-bottom-color: var(--accent); }
-.nav ul a.nav-cv { height: 34px; padding: 0 14px; display: inline-flex; align-items: center; border: 1.5px solid var(--ink); background: var(--ink); color: var(--paper); transition: transform .12s ease, box-shadow .12s ease; }
-.nav ul a.nav-cv:hover, .nav ul a.nav-cv:focus-visible { color: var(--paper); transform: translate(-2px, -2px); box-shadow: 3px 3px 0 var(--accent); }
+.nav ul { list-style: none; padding: 0; display: flex; gap: 8px; align-items: center; }
+.nav ul a { text-decoration: none; height: 34px; padding: 0 14px; display: inline-flex; align-items: center; border: 1.5px solid var(--ink); background: #FBFAF6; font-weight: 500; transition: transform .12s ease, box-shadow .12s ease; }
+.nav ul a:hover, .nav ul a:focus-visible { transform: translate(-2px, -2px); box-shadow: 3px 3px 0 var(--ink); }
+.nav ul a[aria-current] { box-shadow: inset 0 -3px 0 var(--accent); }
+.nav ul a[aria-current]:hover, .nav ul a[aria-current]:focus-visible { box-shadow: inset 0 -3px 0 var(--accent), 3px 3px 0 var(--ink); }
+.nav ul a.nav-cv { background: var(--ink); color: var(--paper); }
+.nav ul a.nav-cv:hover, .nav ul a.nav-cv:focus-visible { box-shadow: 3px 3px 0 var(--accent); }
 
 /* ---- home: profile, chips, buttons ---- */
 .live { margin-top: 18px; }
@@ -180,7 +181,17 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 .profile dt { color: var(--muted); }
 .profile dd { margin: 0; }
 .profile-panel { border: none; border-bottom: 1.5px solid var(--ink); }
+.profile-head .ph-place::before { content: " · "; }
 .profile-inline { display: none; margin-top: 24px; max-width: 420px; }
+/* on phones the name is already the big heading, so the card shows the role instead */
+.profile-inline .profile-head { padding: 12px 14px; }
+.profile-inline .profile-head img { width: 56px; height: 56px; }
+.profile-inline .profile-head b { display: none; }
+.profile-inline .profile-head span { display: block; }
+.profile-inline .profile-head .ph-role { font-family: var(--font-serif), serif; font-size: 17px; line-height: 1.15; color: var(--ink); }
+.profile-inline .profile-head .ph-place { margin-top: 2px; }
+.profile-inline .profile-head .ph-place::before { content: none; }
+.profile-inline dl { grid-template-columns: auto 1fr; gap: 6px 12px; padding: 12px 14px 14px; font-size: 12px; }
 
 .chips { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; max-width: 62ch; }
 .chips li { font-family: var(--font-mono), monospace; font-size: 12px; padding: 3px 8px; border: 1px solid var(--ink); background: #FBFAF6; line-height: 1.4; }
@@ -238,16 +249,30 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 .diag.mini { pointer-events: none; }
 .diag.mini text { font-size: 15px; fill: var(--ink); stroke: none; }
 
-/* the side panel stays in view while the long left column scrolls, so it never ends half way down */
-@media (min-width: 1001px) and (min-height: 860px) {
-  .home .panel { align-items: flex-start; }
-  .home .panel-in { position: sticky; top: 64px; height: calc(100dvh - 64px); }
+/* the side panel stays in view while the long left column scrolls, so it never ends half way down.
+   Pinned by its bottom edge: on short screens it scrolls until the Revision row reaches the bottom, then stays. */
+@media (min-width: 1001px) {
+  .home .panel { align-items: flex-end; position: relative; }
+  .home .panel-in { position: sticky; bottom: 0; min-height: calc(100dvh - 64px); }
+}
+/* a little tighter on laptop-height screens so the whole panel fits under the menu */
+@media (min-width: 1001px) and (max-height: 860px) {
+  .profile-panel dl { padding: 10px 16px 12px; }
+  .home .panel .blueprint { padding-top: 20px; }
+  .home .panel .stage { margin-top: 10px; }
+  .home .panel .facts { margin-bottom: 12px; }
+}
+/* on screens wider than the page, carry the grid paper out to the right edge */
+@media (min-width: 1181px) {
+  body { overflow-x: clip; }
+  .home .panel::after { content: ""; position: absolute; top: 0; bottom: 0; left: 100%; width: calc((100vw - 1180px) / 2); background: inherit; }
 }
 
 @media (max-width: 1000px) {
   .nav { padding: 12px 16px; font-size: 13px; }
   .nav .brand span { display: none; }
-  .nav ul { gap: 14px; }
+  .nav ul { gap: 6px; }
+  .nav ul a { height: 32px; padding: 0 9px; }
   .profile-panel { display: none; }
   .profile-inline { display: block; }
   .card { grid-template-columns: 1fr; }
@@ -260,8 +285,8 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
   .card .foot { flex-wrap: wrap; }
   .card .pen { white-space: nowrap; margin-left: 0; }
 }
-@media (max-width: 380px) { .nav ul { gap: 10px; } .nav ul a.nav-cv { padding: 0 9px; } }
+@media (max-width: 380px) { .nav ul a { padding: 0 7px; } }
 @media (prefers-reduced-motion: reduce) {
   .btn, .card, .nav ul a, .kicker a .arr { transition: none; }
-  .btn:hover, .card:hover, .card:focus-within, .nav ul a.nav-cv:hover, .kicker a:hover .arr { transform: none; }
+  .btn:hover, .card:hover, .card:focus-within, .nav ul a:hover, .nav ul a:focus-visible, .kicker a:hover .arr { transform: none; }
 }
