@@ -21,7 +21,7 @@ export const entries: Entry[] = [
     stack: ['Astro', 'Cloudflare Pages', 'GitHub Actions'], repo: 'clubs-rkgit' },
   { id: 'vyapari', title: 'Vyapari Copilot', summary: 'AI assistant for kirana stores: scan to stock, barcode billing', date: '2025-11-23', kind: 'project',
     stack: ['JavaScript', 'Gemini', 'Google Vision'], repo: 'vyapari', featured: true },
-  { id: 'qr-attendance', title: 'QR attendance', summary: 'QR-code attendance for the college ERP', date: '2025-11-04', kind: 'project', stack: ['TypeScript'] },
+  { id: 'qr-attendance', title: 'QR attendance', summary: 'QR-code attendance for the college ERP', date: '2025-11-04', kind: 'project', stack: ['JavaScript'] },
   { id: 'techtrix', title: "Techtrix '25: 1st place", summary: 'National hackathon at ITS Engineering College, 100+ teams', date: '2025-06', kind: 'win', stack: [], featured: true, pen: 'my first hackathon' },
   { id: 'srijan', title: 'SRIJAN 2025: 3rd prize', summary: 'ECE RKGIT project exhibition, with a cash award', date: '2025-04', kind: 'win', stack: [], featured: true },
   { id: 'binary-hacks', title: 'Binary Hacks 3.0: 2nd place', summary: 'Intra-college hackathon with team Log4J', date: '2025-06', kind: 'win', stack: [] },
