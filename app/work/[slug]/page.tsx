@@ -29,10 +29,18 @@ export default async function CaseStudyPage({ params }: Props) {
       <h1 className="name">{c.title}</h1>
       {c.live ? <p className="live"><a href={c.live.href}>{c.live.label}</a></p> : null}
       <p className="lede">{c.problem}</p>
+      {c.parts ? (
+        <>
+          <h2 className="section-h">What it does</h2>
+          <dl className="parts">{c.parts.map((x) => <div key={x.name}><dt>{x.name}</dt><dd>{x.does}</dd></div>)}</dl>
+        </>
+      ) : null}
       <h2 className="section-h">How it works</h2>
       <Drawing spec={c.drawing} />
-      <h2 className="section-h">The code</h2>
-      {c.excerpts.map((e) => <CodeExcerpt key={e.file} excerpt={e} />)}
+      <h2 className="section-h">Key decisions</h2>
+      {c.excerpts.map((e, i) => <CodeExcerpt key={e.file} excerpt={e} n={i + 1} />)}
+      <h2 className="section-h">What I&apos;d do differently</h2>
+      <ul className="results">{c.differently.map((d) => <li key={d}>{d}</li>)}</ul>
       <h2 className="section-h">Results</h2>
       <ul className="results">{c.results.map((r) => <li key={r}>{r}</li>)}</ul>
       {c.links.length ? <p className="more">{c.links.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}</p> : null}

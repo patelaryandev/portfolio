@@ -64,8 +64,8 @@ export default function HowItsBuilt() {
         <p className="pen">the build fails if JavaScript goes over budget</p>
 
         <h2 className="section-h">5 · The Worker, annotated</h2>
-        <CodeExcerpt excerpt={{ title: 'The two endpoints', file: '../../worker/handlers.ts', lang: 'ts', source: 'worker/handlers.ts', note: 'the ping never counts as a visit; a broken counter still answers' }} />
-        <CodeExcerpt excerpt={{ title: "Today's count", file: '../../worker/visit-counter.ts', lang: 'ts', source: 'worker/visit-counter.ts', note: 'a Durable Object, so simultaneous visits never lose a count' }} />
+        <CodeExcerpt excerpt={{ title: 'The two endpoints', file: '../../worker/handlers.ts', lang: 'ts', source: 'worker/handlers.ts', why: 'The page asks the Worker for the live numbers. The ping never counts as a visit, and if the counter breaks, the endpoint still answers so the page does not.', href: 'https://github.com/patelaryandev/portfolio/blob/main/worker/handlers.ts' }} n={1} />
+        <CodeExcerpt excerpt={{ title: "Today's count", file: '../../worker/visit-counter.ts', lang: 'ts', source: 'worker/visit-counter.ts', why: 'The count lives in a Durable Object, so two visits at the same moment never overwrite each other and no count is lost.', href: 'https://github.com/patelaryandev/portfolio/blob/main/worker/visit-counter.ts' }} n={2} />
 
         <h2 className="section-h">6 · Decisions</h2>
         <ul className="decisions">

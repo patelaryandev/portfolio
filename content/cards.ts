@@ -10,7 +10,7 @@ export type Card = {
 export const cards: Card[] = [
   {
     id: 'gfg-rkgit',
-    line: 'The platform our GFG Campus Body runs on: 3 React apps on one Cloudflare Worker API.',
+    line: 'The GFG Campus Body RKGIT website, admin portal and team portal: 3 React apps on one Cloudflare Worker API.',
     tags: ['React', 'Cloudflare Workers', 'KV', 'R2', 'Firestore'],
     ext: { label: 'Live site ↗', href: 'https://gfg.rkgit.in' },
     mini: {

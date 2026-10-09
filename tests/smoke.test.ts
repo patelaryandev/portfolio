@@ -33,7 +33,7 @@ describe('static export', () => {
     expect(page('how-its-built.html')).not.toContain('A. Patel');
   });
   it('the code toggle works without JS', () => {
-    expect(page('work/gfg-rkgit.html')).toContain('<details>');
+    expect(page('work/gfg-rkgit.html')).toContain('<details class="excerpt">');
   });
   it('404 speaks in the site voice', () => {
     expect(page('404.html')).toContain('has no page here');

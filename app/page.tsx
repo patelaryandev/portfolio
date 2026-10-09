@@ -21,7 +21,7 @@ const jsonLd = {
     {
       '@type': 'Person', '@id': 'https://patelaryan.dev/#me',
       name: site.name, url: 'https://patelaryan.dev', image: 'https://patelaryan.dev/aryan-patel.jpg',
-      jobTitle: site.title, description: site.lede, email: `mailto:${site.email}`,
+      jobTitle: site.title, description: site.summary, email: `mailto:${site.email}`,
       address: { '@type': 'PostalAddress', addressLocality: site.place, addressCountry: 'IN' },
       affiliation: { '@type': 'CollegeOrUniversity', name: 'Raj Kumar Goel Institute of Technology (RKGIT)' },
       memberOf: { '@type': 'Organization', name: 'GFG Campus Body RKGIT', url: 'https://gfg.rkgit.in' },
@@ -45,7 +45,7 @@ export default function Home() {
     <main className="home wrap">
       <section className="left">
         <MeLine />
-        <h1 className="name">{site.name},<br /><i>v{version}</i>, still shipping.</h1>
+        <h1 className="name">{site.name}.<br />I build web apps and <i>ship them</i>.</h1>
         <p className="lede">{site.lede}</p>
         <ul className="chips" aria-label="What I work with">{site.stack.map((s) => <li key={s}>{s}</li>)}</ul>
         <OpenTo />
