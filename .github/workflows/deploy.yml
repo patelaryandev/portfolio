@@ -22,24 +22,27 @@ jobs:
     timeout-minutes: 15
     steps:
       # The deploy log on /how-its-built lists the last 10 commits, so fetch that many.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 10
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 24
           cache: npm
 
       - run: npm ci
-      - run: npm run typecheck
-      - run: npm test
 
+      # Build first: it writes content/build.json, weight.json and github.json (gitignored),
+      # which the typecheck and the tests import, and out/, which the smoke test reads.
       # The stamp records via: github-actions and a link to this run.
       # GITHUB_TOKEN only lifts the GitHub API rate limit for the stars and last-push data.
       - run: npm run build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: npm run typecheck
+      - run: npm test
 
       # The Worker bundles content/build.json, so it travels with the built site.
       - uses: actions/upload-artifact@v4
@@ -59,9 +62,9 @@ jobs:
       name: production
       url: https://patelaryan.dev
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 24
           cache: npm
