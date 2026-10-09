@@ -2,6 +2,12 @@
   --paper: #F3F0E8; --ink: #1C1B18; --accent: #B23A0A; --muted: #5E5A51; --body: #3A3832;
   --rule: #D9D4C7; --grid: #ECEDE6; --blue-ink: #24272A; --live: #3F8F4E;
 }
+/* Stand-ins while the web fonts load, sized to match them so the text doesn't jump on swap. */
+@font-face { font-family: "Newsreader Fallback"; src: local("Times New Roman"); ascent-override: 69.68%; descent-override: 25.12%; line-gap-override: 0%; size-adjust: 105.48%; }
+@font-face { font-family: "Schibsted Grotesk Fallback"; src: local("Arial"); ascent-override: 93.46%; descent-override: 24.67%; line-gap-override: 0%; size-adjust: 104.49%; }
+@font-face { font-family: "JetBrains Mono Fallback"; src: local("Arial"); ascent-override: 75.79%; descent-override: 22.29%; line-gap-override: 0%; size-adjust: 134.59%; }
+@font-face { font-family: "Archivo Fallback"; src: local("Arial"); ascent-override: 88.96%; descent-override: 21.28%; line-gap-override: 0%; size-adjust: 98.7%; }
+@font-face { font-family: "Reenie Beanie Fallback"; src: local("Arial"); ascent-override: 98.63%; descent-override: 32.88%; line-gap-override: 0%; size-adjust: 76.04%; }
 * { box-sizing: border-box; margin: 0; }
 html { background: var(--paper); color: var(--ink); -webkit-text-size-adjust: 100%; }
 body { font-family: var(--font-sans), system-ui, sans-serif; line-height: 1.55; overflow-wrap: anywhere; }
