@@ -24,6 +24,7 @@ export default async function CaseStudyPage({ params }: Props) {
     <main className="page wrap">
       <p className="top"><Link href="/work">← Every release</Link></p>
       <h1 className="name">{c.title}</h1>
+      {c.live ? <p className="live"><a href={c.live.href}>{c.live.label}</a></p> : null}
       <p className="lede">{c.problem}</p>
       <h2 className="section-h">How it works</h2>
       <Drawing spec={c.drawing} />

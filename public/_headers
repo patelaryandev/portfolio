@@ -1,0 +1,6 @@
+/resume.pdf
+  Cache-Control: public, max-age=0, must-revalidate
+/aryan-patel.jpg
+  Cache-Control: public, max-age=86400
+/og.png
+  Cache-Control: public, max-age=86400

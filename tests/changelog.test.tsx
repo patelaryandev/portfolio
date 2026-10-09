@@ -12,6 +12,10 @@ describe('Changelog', () => {
     expect(html).toContain('v4.7.0');
     expect(html).toContain('Aug 2026');
   });
+  it('stretches the title link over the row and links external rows', () => {
+    const html = renderToStaticMarkup(<Changelog items={[{ ...item, page: undefined, url: 'https://clubs.rkgit.in' }]} />);
+    expect(html).toContain('class="stretch" href="https://clubs.rkgit.in"');
+  });
   it('shows "current" for ongoing work', () => {
     expect(renderToStaticMarkup(<Changelog items={[{ ...item, status: 'current' }]} />)).toContain('current');
   });

@@ -1,8 +1,11 @@
-import Link from 'next/link';
 import { Blueprint } from '@/components/Blueprint';
 import { Changelog } from '@/components/Changelog';
-import { Contact } from '@/components/Contact';
+import { Cta } from '@/components/Cta';
+import { Profile } from '@/components/Profile';
+import { ProjectCards } from '@/components/ProjectCards';
+import Link from 'next/link';
 import build from '@/content/build.json';
+import { cards } from '@/content/cards';
 import { entries } from '@/content/projects';
 import { site } from '@/content/site';
 import { formatBuilt, type BuildStamp } from '@/lib/stamp';
@@ -12,23 +15,32 @@ const stamp = build as BuildStamp;
 const version = siteVersion(new Date(stamp.time));
 
 export default function Home() {
-  const featured = withVersions(entries).filter((e) => e.featured).slice(0, 6);
+  const all = withVersions(entries);
+  const cardIds: string[] = cards.map((c) => c.id);
+  const pens = Object.fromEntries(all.map((e) => [e.id, e.pen]));
+  const shipped = all.filter((e) => e.featured && !cardIds.includes(e.id));
   return (
     <main className="home wrap">
       <section className="left">
-        <p className="top"><b>{site.name}</b> &nbsp;·&nbsp; {site.place}</p>
         <h1 className="name">{site.name},<br /><i>v{version}</i>, still shipping.</h1>
-        <p className="lede">{site.lede} {site.role}.</p>
-        <Changelog items={featured} showPens />
-        <p className="more"><Link href="/work">Every release →</Link> &nbsp;·&nbsp; <Link href="/how-its-built">How this site is built →</Link></p>
+        <p className="lede">{site.lede}</p>
+        <Profile where="inline" />
+        <ul className="chips" aria-label="What I work with">{site.stack.map((s) => <li key={s}>{s}</li>)}</ul>
+        <Cta />
+        <h2 className="kicker"><span>Selected work</span></h2>
+        <ProjectCards items={all.filter((e) => cardIds.includes(e.id))} pens={pens} />
+        <h2 className="kicker"><span>Also shipped</span><Link href="/work">Every release <span className="arr">→</span></Link></h2>
+        <Changelog items={shipped} showPens />
         <section className="about" aria-labelledby="about-h">
           <h2 id="about-h">About</h2>
           {site.about.map((p) => <p key={p}>{p}</p>)}
-          <Contact />
         </section>
       </section>
-      <aside className="panel" aria-label="How this page reached you">
-        <Blueprint stamp={stamp} siteVersion={version} builtAt={formatBuilt(stamp.time)} />
+      <aside className="panel grid" aria-label="Profile and how this page reached you">
+        <div className="panel-in">
+          <Profile where="panel" />
+          <Blueprint stamp={stamp} siteVersion={version} builtAt={formatBuilt(stamp.time)} />
+        </div>
       </aside>
     </main>
   );

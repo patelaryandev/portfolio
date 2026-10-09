@@ -4,6 +4,7 @@ export type Entry = {
   status?: 'current';
   kind: 'project' | 'win';
   stack: string[];
+  url?: string;                    // external link for the row, when there is no case study
   repo?: string;                   // public repo name under patelaryandev, used as the GitHub allowlist
   page?: 'gfg-rkgit' | 'nivaran' | 'prometheus';
   featured?: boolean;              // shown on the homepage
@@ -18,7 +19,7 @@ export const entries: Entry[] = [
   { id: 'nivaran', title: 'Nivaran', summary: 'Report a civic issue with a photo and GPS; the city sees it ranked', date: '2026-04-01', kind: 'project',
     stack: ['React', 'Supabase', 'PostgreSQL', 'Firebase Cloud Messaging'], page: 'nivaran', featured: true },
   { id: 'clubs-rkgit', title: 'clubs.rkgit.in', summary: 'Directory of every RKGIT club, kept in one JSON file that non-developers can edit', date: '2026-09-14', kind: 'project',
-    stack: ['Astro', 'Cloudflare Pages', 'GitHub Actions'], repo: 'clubs-rkgit' },
+    stack: ['Astro', 'Cloudflare Pages', 'GitHub Actions'], repo: 'clubs-rkgit', url: 'https://clubs.rkgit.in', featured: true },
   { id: 'vyapari', title: 'Vyapari Copilot', summary: 'AI assistant for kirana stores: scan to stock, barcode billing', date: '2025-11-23', kind: 'project',
     stack: ['JavaScript', 'Gemini', 'Google Vision'], repo: 'vyapari', featured: true },
   { id: 'qr-attendance', title: 'QR attendance', summary: 'QR-code attendance for the college ERP', date: '2025-11-04', kind: 'project', stack: ['JavaScript'] },

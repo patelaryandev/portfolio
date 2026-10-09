@@ -96,3 +96,5 @@ graphify-out/
 /content/build.json
 /content/weight.json
 /content/github.json
+/content/resume.json
+/public/resume.pdf

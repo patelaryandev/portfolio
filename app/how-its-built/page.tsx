@@ -70,7 +70,7 @@ export default function HowItsBuilt() {
         </ul>
 
         <TitleBlock cells={[
-          { label: 'Drawn by', value: 'A. Patel' }, { label: 'Revision', value: version },
+          { label: 'Drawn by', value: 'Aryan Patel' }, { label: 'Revision', value: version },
           { label: 'Build', value: stamp.sha }, { label: 'Sheet', value: '2 / 2' },
         ]} />
       </div>
