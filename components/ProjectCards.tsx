@@ -36,17 +36,12 @@ export function ProjectCards({ items, pens }: { items: Item[]; pens: Record<stri
               </div>
               <p>{c.line}</p>
               <ul className="tags">{c.tags.map((t) => <li key={t}>{t}</li>)}</ul>
-              {c.ext || pens[c.id] ? (
-                <div className="foot">
-                  {c.ext ? <a className="ext" href={c.ext.href}>{c.ext.label}</a> : null}
-                  {pens[c.id] ? <span className="pen">← {pens[c.id]}</span> : null}
-                </div>
-              ) : null}
-            </div>
-            {/* The title link covers the whole card; this strip just shows that it opens. */}
-            <div className="open" aria-hidden="true">
-              <span className="open-l"><b>Read the case study</b><small>what it does · key decisions · results</small></span>
-              <span className="open-arrow"><span>→</span></span>
+              <div className="foot">
+                {c.ext ? <a className="ext" href={c.ext.href}>{c.ext.label}</a> : null}
+                {pens[c.id] ? <span className="pen">← {pens[c.id]}</span> : null}
+                {/* The title link covers the whole card; this only shows that it opens. */}
+                <span className="go" aria-hidden="true">Case study <i><span>→</span></i></span>
+              </div>
             </div>
           </li>
         );

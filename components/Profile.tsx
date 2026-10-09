@@ -5,7 +5,7 @@ export function Profile() {
   return (
     <div className="profile profile-panel grid">
       <div className="profile-head">
-        <img src="/aryan-patel.jpg" width="64" height="64" alt={`Photo of ${site.name}`} />
+        <img src="/aryan-patel.jpg" width="96" height="96" alt={`Photo of ${site.name}`} />
         <div><b>{site.name}</b><span className="ph-role">{site.title}</span><span className="ph-place">{site.place}</span></div>
       </div>
       <dl>
@@ -21,8 +21,8 @@ export function Profile() {
 export function MeLine() {
   return (
     <div className="me-line">
-      <img src="/aryan-patel.jpg" width="52" height="52" alt={`Photo of ${site.name}`} />
-      <p><b>{site.title}</b><span>{site.place} · <i>{site.profile.currently}</i></span></p>
+      <img src="/aryan-patel.jpg" width="84" height="84" alt={`Photo of ${site.name}`} />
+      <p><b>{site.title}</b><span>{site.profile.currently}</span><span>{site.place}</span></p>
     </div>
   );
 }

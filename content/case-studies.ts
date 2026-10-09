@@ -21,7 +21,7 @@ export const caseStudies: CaseStudy[] = [
     slug: 'gfg-rkgit',
     title: 'GFG RKGIT platform',
     live: { label: 'Live site: gfg.rkgit.in ↗', href: 'https://gfg.rkgit.in' },
-    problem: 'The GFG Campus Body RKGIT is our college coding club, with 300+ members. This platform is how it runs events, registrations and attendance. A club platform has to outlive the students who built it, so I made the browser untrusted: every app, the public site included, goes through one API that checks who you are before anything reaches the database.',
+    problem: 'The GFG Campus Body RKGIT is our college coding club. This platform is how we manage the whole club and every event we run: registrations, attendance, the team and its members. 300+ students have signed up on it through our events. A club platform has to outlive the students who built it, so I made the browser untrusted: every app, the public site included, goes through one API that checks who you are before anything reaches the database.',
     parts: [
       { name: 'Public website', does: 'gfg.rkgit.in. Anyone can see upcoming events, register for one, send feedback, apply to join the team, and browse the current team and alumni.' },
       { name: 'Admin portal', does: 'For the core team. Create and edit events, manage members, and give volunteers scanner access to check people in at an event.' },
@@ -64,7 +64,7 @@ export const caseStudies: CaseStudy[] = [
       'The daily cron writes the whole event back just to empty one list. If an admin edits the event at the same moment, one change can overwrite the other. I\'d update only the scanners field.',
       'Audit entries are written one at a time in a loop. I\'d write them in one batch, so a big event is cleared in one round trip.',
     ],
-    results: ['Used by 300+ members of GFG Campus Body RKGIT', 'Admin actions need a token and an active admin record'],
+    results: ['300+ students signed up through our club events', 'Admin actions need a token and an active admin record'],
     links: [],
   },
   {

@@ -8,7 +8,7 @@ LinkedIn: https://www.linkedin.com/in/aryan-patel-865572327/
 
 ## Projects
 
-- [GFG RKGIT platform](https://patelaryan.dev/work/gfg-rkgit): the website and portals of the GFG Campus Body RKGIT, used by 300+ members. 3 React apps on one Cloudflare Worker API, with Firebase Auth, Firestore, KV and R2.
+- [GFG RKGIT platform](https://patelaryan.dev/work/gfg-rkgit): the website and portals of the GFG Campus Body RKGIT, used to run the club and its events; 300+ students have signed up on it through those events. 3 React apps on one Cloudflare Worker API, with Firebase Auth, Firestore, KV and R2.
 - [Prometheus: Expense Tracker API](https://patelaryan.dev/work/prometheus): FastAPI and PostgreSQL with CI, tagged Docker releases on GHCR, Prometheus metrics and Sentry.
 - [Nivaran](https://patelaryan.dev/work/nivaran): civic issue reporting web app in React with Supabase and FCM push notifications.
 
