@@ -10,7 +10,7 @@ export const site = {
     "Hackathons: 1st at Techtrix '25 (100+ teams), 2nd at Binary Hacks 3.0, 3rd at SRIJAN 2025.",
   ],
   stack: ['React', 'JavaScript', 'Cloudflare Workers', 'Supabase', 'Firebase', 'FastAPI', 'PostgreSQL', 'Docker', 'GitHub Actions'],
-  profile: { currently: 'Vice President, GFG Campus Body RKGIT', lookingFor: 'Full-Stack and DevOps roles' },
+  profile: { currently: 'VP, GFG Campus Body RKGIT', lookingFor: 'Full-Stack and DevOps roles' },
   email: 'hi@patelaryan.dev',
   github: 'https://github.com/patelaryandev',
   linkedin: 'https://www.linkedin.com/in/aryan-patel-865572327/',

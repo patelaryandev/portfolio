@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { CodeExcerpt } from '@/components/CodeExcerpt';
 import { Drawing } from '@/components/Drawing';
 import { caseStudies } from '@/content/case-studies';
+import { Nav } from '@/components/Nav';
 
 export const dynamicParams = false;
 export const generateStaticParams = () => caseStudies.map((c) => ({ slug: c.slug }));
@@ -21,6 +22,8 @@ export default async function CaseStudyPage({ params }: Props) {
   const c = caseStudies.find((x) => x.slug === slug);
   if (!c) notFound();
   return (
+    <>
+    <Nav current="work" />
     <main className="page wrap">
       <p className="top"><Link href="/work">← Every release</Link></p>
       <h1 className="name">{c.title}</h1>
@@ -34,5 +37,6 @@ export default async function CaseStudyPage({ params }: Props) {
       <ul className="results">{c.results.map((r) => <li key={r}>{r}</li>)}</ul>
       {c.links.length ? <p className="more">{c.links.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}</p> : null}
     </main>
+    </>
   );
 }

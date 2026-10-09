@@ -9,6 +9,7 @@ import weight from '@/content/weight.json';
 import { formatBuilt, type BuildStamp } from '@/lib/stamp';
 import { siteVersion } from '@/lib/version';
 import type { Weight } from '@/lib/weight';
+import { Nav } from '@/components/Nav';
 
 export const metadata: Metadata = { title: "How it's built", description: 'This site, documented by its own build: request path, deploy path, page weight and the Worker source.' };
 
@@ -29,6 +30,8 @@ const decisions = [
 
 export default function HowItsBuilt() {
   return (
+    <>
+    <Nav current="how" />
     <main className="page wrap">
       <p className="top"><Link href="/">← Aryan Patel</Link></p>
       <div className="sheet grid">
@@ -75,5 +78,6 @@ export default function HowItsBuilt() {
         ]} />
       </div>
     </main>
+    </>
   );
 }

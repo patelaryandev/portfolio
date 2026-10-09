@@ -4,17 +4,18 @@ import { formatMonth } from './Changelog';
 
 type Item = { id: string; title: string; version: string; date: string; status?: 'current' };
 
-function Thumb({ mini }: { mini: Card['mini'] }) {
+function Thumb({ id, mini }: { id: string; mini: Card['mini'] }) {
+  const mar = `mar-${id}`;
   return (
     <svg className="diag mini" viewBox="0 0 300 190" fill="none" stroke="var(--blue-ink)" strokeWidth="1.4">
-      <defs><marker id="mar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8" fill="none" stroke="var(--blue-ink)" /></marker></defs>
+      <defs><marker id={mar} viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8" fill="none" stroke="var(--blue-ink)" /></marker></defs>
       {mini.boxes.map((b) => (
         <g key={b.text}>
           <rect x={b.x} y={b.y} width={b.w} height="34" fill="var(--paper)" strokeDasharray={b.dashed ? '4 3' : undefined} />
           <text x={b.x + b.w / 2} y={b.y + 22} textAnchor="middle">{b.text}</text>
         </g>
       ))}
-      {mini.arrows.map((a) => <path key={a.d} d={a.d} strokeDasharray={a.dashed ? '4 3' : undefined} markerEnd="url(#mar)" />)}
+      {mini.arrows.map((a) => <path key={a.d} d={a.d} strokeDasharray={a.dashed ? '4 3' : undefined} markerEnd={`url(#${mar})`} />)}
     </svg>
   );
 }
@@ -27,7 +28,7 @@ export function ProjectCards({ items, pens }: { items: Item[]; pens: Record<stri
         if (!it) return null;
         return (
           <li className="card" key={c.id}>
-            <div className="thumb grid" aria-hidden="true"><Thumb mini={c.mini} /></div>
+            <div className="thumb grid" aria-hidden="true"><Thumb id={c.id} mini={c.mini} /></div>
             <div className="body">
               <div className="head">
                 <h3><Link href={`/work/${c.id}`}>{it.title}</Link></h3>

@@ -10,6 +10,7 @@ import { entries } from '@/content/projects';
 import { site } from '@/content/site';
 import { formatBuilt, type BuildStamp } from '@/lib/stamp';
 import { siteVersion, withVersions } from '@/lib/version';
+import { Nav } from '@/components/Nav';
 
 const stamp = build as BuildStamp;
 const version = siteVersion(new Date(stamp.time));
@@ -20,6 +21,8 @@ export default function Home() {
   const pens = Object.fromEntries(all.map((e) => [e.id, e.pen]));
   const shipped = all.filter((e) => e.featured && !cardIds.includes(e.id));
   return (
+    <>
+    <Nav />
     <main className="home wrap">
       <section className="left">
         <h1 className="name">{site.name},<br /><i>v{version}</i>, still shipping.</h1>
@@ -43,5 +46,6 @@ export default function Home() {
         </div>
       </aside>
     </main>
+    </>
   );
 }

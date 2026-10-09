@@ -98,3 +98,9 @@ graphify-out/
 /content/github.json
 /content/resume.json
 /public/resume.pdf
+
+# Resume source lives in project-docs/resume (private); only the PDF is committed here
+/resume/*.tex
+/resume/*.aux
+/resume/*.log
+/resume/*.out
