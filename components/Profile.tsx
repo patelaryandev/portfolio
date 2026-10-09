@@ -1,9 +1,9 @@
 import { site } from '@/content/site';
 
-// Photo, name and three facts. Rendered twice on the home page: in the side panel on wide screens, under the buttons on phones.
-export function Profile({ where }: { where: 'panel' | 'inline' }) {
+// Photo, name and three facts, in the side panel on wide screens.
+export function Profile() {
   return (
-    <div className={`profile profile-${where} grid`}>
+    <div className="profile profile-panel grid">
       <div className="profile-head">
         <img src="/aryan-patel.jpg" width="64" height="64" alt={`Photo of ${site.name}`} />
         <div><b>{site.name}</b><span className="ph-role">{site.title}</span><span className="ph-place">{site.place}</span></div>
@@ -15,4 +15,18 @@ export function Profile({ where }: { where: 'panel' | 'inline' }) {
       </dl>
     </div>
   );
+}
+
+// On phones the panel sits at the bottom, so the photo and role go above the name instead.
+export function MeLine() {
+  return (
+    <div className="me-line">
+      <img src="/aryan-patel.jpg" width="52" height="52" alt={`Photo of ${site.name}`} />
+      <p><b>{site.title}</b><span>{site.place} · <i>{site.profile.currently}</i></span></p>
+    </div>
+  );
+}
+
+export function OpenTo() {
+  return <p className="open-to"><span className="dot" />Open to {site.profile.lookingFor}</p>;
 }

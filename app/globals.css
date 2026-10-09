@@ -79,6 +79,7 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
   .pkt, .ripple { display: none; }
   .blueprint.blueprint :is(.edge, .dest) { animation: none; }
 }
+@media (max-width: 340px) { .cta { flex-wrap: wrap; } }
 @media (prefers-reduced-motion: reduce) {
   .pkt, .ripple { display: none; }
   .blueprint.blueprint :is(.edge, .dest) { animation: none; }
@@ -129,7 +130,7 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 .about p { margin-top: 10px; color: var(--body); }
 @media (max-width: 1000px) {
   .home { grid-template-columns: 1fr; min-height: 0; }
-  .home .name { margin-top: 20px; }
+  .home .name { margin-top: 22px; }
   .home .left { padding: 28px 22px 24px; }
   .home .panel { border-left: none; border-top: 1.5px solid var(--ink); }
 }
@@ -182,16 +183,13 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 .profile dd { margin: 0; }
 .profile-panel { border: none; border-bottom: 1.5px solid var(--ink); }
 .profile-head .ph-place::before { content: " · "; }
-.profile-inline { display: none; margin-top: 24px; max-width: 420px; }
-/* on phones the name is already the big heading, so the card shows the role instead */
-.profile-inline .profile-head { padding: 12px 14px; }
-.profile-inline .profile-head img { width: 56px; height: 56px; }
-.profile-inline .profile-head b { display: none; }
-.profile-inline .profile-head span { display: block; }
-.profile-inline .profile-head .ph-role { font-family: var(--font-serif), serif; font-size: 17px; line-height: 1.15; color: var(--ink); }
-.profile-inline .profile-head .ph-place { margin-top: 2px; }
-.profile-inline .profile-head .ph-place::before { content: none; }
-.profile-inline dl { grid-template-columns: auto 1fr; gap: 6px 12px; padding: 12px 14px 14px; font-size: 12px; }
+.me-line, .open-to { display: none; }
+.me-line { align-items: center; gap: 12px; }
+.me-line img { width: 52px; height: 52px; border: 1.5px solid var(--ink); object-fit: cover; flex: none; display: block; }
+.me-line b { display: block; font-family: var(--font-serif), serif; font-weight: 400; font-size: 18px; line-height: 1.2; }
+.me-line span { display: block; font-size: 13px; color: var(--muted); line-height: 1.35; margin-top: 2px; }
+.me-line i { font-style: normal; white-space: nowrap; }
+.open-to { margin-top: 20px; font-size: 14px; font-weight: 500; }
 
 .chips { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; max-width: 62ch; }
 .chips li { font-family: var(--font-mono), monospace; font-size: 12px; padding: 3px 8px; border: 1px solid var(--ink); background: #FBFAF6; line-height: 1.4; }
@@ -274,7 +272,14 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
   .nav ul { gap: 6px; }
   .nav ul a { height: 32px; padding: 0 9px; }
   .profile-panel { display: none; }
-  .profile-inline { display: block; }
+  /* phones: who I am, name, intro, open to, buttons, then the stack */
+  .home .left { display: flex; flex-direction: column; }
+  .home .left > * { order: 2; }
+  .home .left > :is(.me-line, .name, .lede, .open-to, .cta) { order: 0; }
+  .home .left > .chips { order: 1; margin-top: 28px; }
+  .chips::before { content: "Stack"; flex-basis: 100%; font-family: var(--font-mono), monospace; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .me-line { display: flex; }
+  .open-to { display: block; }
   .card { grid-template-columns: 1fr; }
   .card .thumb { border-right: none; border-bottom: 1.5px solid var(--ink); }
   .card .thumb svg { max-width: 260px; margin: 0 auto; }
@@ -285,7 +290,14 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
   .card .foot { flex-wrap: wrap; }
   .card .pen { white-space: nowrap; margin-left: 0; }
 }
-@media (max-width: 380px) { .nav ul a { padding: 0 7px; } }
+@media (max-width: 380px) {
+  .nav ul a { padding: 0 7px; }
+  .cta { gap: 6px; }
+  .btn { padding: 0 10px; }
+  .btn.icon { width: 38px; }
+  .cv small { font-size: 10px; }
+}
+@media (max-width: 340px) { .cta { flex-wrap: wrap; } }
 @media (prefers-reduced-motion: reduce) {
   .btn, .card, .nav ul a, .kicker a .arr { transition: none; }
   .btn:hover, .card:hover, .card:focus-within, .nav ul a:hover, .nav ul a:focus-visible, .kicker a:hover .arr { transform: none; }

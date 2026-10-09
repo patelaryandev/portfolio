@@ -1,7 +1,7 @@
 import { Blueprint } from '@/components/Blueprint';
 import { Changelog } from '@/components/Changelog';
 import { Cta } from '@/components/Cta';
-import { Profile } from '@/components/Profile';
+import { MeLine, OpenTo, Profile } from '@/components/Profile';
 import { ProjectCards } from '@/components/ProjectCards';
 import Link from 'next/link';
 import build from '@/content/build.json';
@@ -25,11 +25,12 @@ export default function Home() {
     <Nav />
     <main className="home wrap">
       <section className="left">
+        <MeLine />
         <h1 className="name">{site.name},<br /><i>v{version}</i>, still shipping.</h1>
         <p className="lede">{site.lede}</p>
         <ul className="chips" aria-label="What I work with">{site.stack.map((s) => <li key={s}>{s}</li>)}</ul>
+        <OpenTo />
         <Cta />
-        <Profile where="inline" />
         <h2 className="kicker"><span>Selected work</span></h2>
         <ProjectCards items={all.filter((e) => cardIds.includes(e.id))} pens={pens} />
         <h2 className="kicker"><span>Also shipped</span><Link href="/work">Every release <span className="arr">→</span></Link></h2>
@@ -41,7 +42,7 @@ export default function Home() {
       </section>
       <aside className="panel grid" aria-label="Profile and how this page reached you">
         <div className="panel-in">
-          <Profile where="panel" />
+          <Profile />
           <Blueprint stamp={stamp} siteVersion={version} builtAt={formatBuilt(stamp.time)} />
         </div>
       </aside>
