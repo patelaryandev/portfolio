@@ -9,6 +9,6 @@ export const site = {
     "Hackathons: 1st at Techtrix '25 (100+ teams), 2nd at Binary Hacks 3.0, 3rd at SRIJAN 2025.",
   ],
   email: 'hi@patelaryan.dev',
-  github: 'https://github.com/witharyan',
+  github: 'https://github.com/patelaryandev',
   linkedin: 'https://www.linkedin.com/in/aryan-patel-865572327/',
 } as const;

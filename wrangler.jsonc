@@ -1,7 +1,7 @@
 // The real site: static files from out/ plus a small Worker for /api/*.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "witharyan",
+  "name": "patelaryan",
   "main": "worker/index.ts",
   "compatibility_date": "2026-10-01",
   "assets": {

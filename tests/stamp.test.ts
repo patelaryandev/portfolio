@@ -16,11 +16,11 @@ describe('makeStamp', () => {
   it('in GitHub Actions: three steps and a run link', () => {
     const s = makeStamp({ ...base, env: {
       GITHUB_ACTIONS: 'true', GITHUB_REF_NAME: 'main', GITHUB_SERVER_URL: 'https://github.com',
-      GITHUB_REPOSITORY: 'witharyan/witharyan', GITHUB_RUN_ID: '42',
+      GITHUB_REPOSITORY: 'patelaryandev/patelaryandev', GITHUB_RUN_ID: '42',
     } });
     expect(s.via).toBe('github-actions');
     expect(s.steps).toEqual(['git push · main', 'GitHub Actions', 'wrangler deploy']);
-    expect(s.runUrl).toBe('https://github.com/witharyan/witharyan/actions/runs/42');
+    expect(s.runUrl).toBe('https://github.com/patelaryandev/patelaryandev/actions/runs/42');
   });
 
   it('marks uncommitted builds honestly', () => {

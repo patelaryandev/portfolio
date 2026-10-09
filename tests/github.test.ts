@@ -3,15 +3,15 @@ import { entries } from '@/content/projects';
 import { attachRepos, pickRepos } from '@/lib/github';
 
 const api = [
-  { name: 'prometheus', stargazers_count: 3, pushed_at: '2026-08-14T04:23:55Z', html_url: 'https://github.com/witharyan/prometheus', language: 'Python' },
-  { name: 'Nivaran', stargazers_count: 9, pushed_at: '2026-04-23T17:41:47Z', html_url: 'https://github.com/witharyan/Nivaran', language: 'Dart' },
-  { name: 'Alexa88879', stargazers_count: 0, pushed_at: '2026-06-23T08:15:55Z', html_url: 'https://github.com/witharyan/Alexa88879', language: null },
+  { name: 'prometheus', stargazers_count: 3, pushed_at: '2026-08-14T04:23:55Z', html_url: 'https://github.com/patelaryandev/prometheus', language: 'Python' },
+  { name: 'Nivaran', stargazers_count: 9, pushed_at: '2026-04-23T17:41:47Z', html_url: 'https://github.com/patelaryandev/Nivaran', language: 'Dart' },
+  { name: 'Alexa88879', stargazers_count: 0, pushed_at: '2026-06-23T08:15:55Z', html_url: 'https://github.com/patelaryandev/Alexa88879', language: null },
 ];
 
 describe('pickRepos', () => {
   it('keeps only allowlisted repos and drops language', () => {
     expect(pickRepos(api, ['prometheus'])).toEqual([
-      { name: 'prometheus', stars: 3, pushedAt: '2026-08-14T04:23:55Z', url: 'https://github.com/witharyan/prometheus' },
+      { name: 'prometheus', stars: 3, pushedAt: '2026-08-14T04:23:55Z', url: 'https://github.com/patelaryandev/prometheus' },
     ]);
   });
   it('treats a non-array response (rate limit error body) as empty', () => {
@@ -45,7 +45,7 @@ describe('loadRepos', () => {
     const { join } = await import('node:path');
     const { loadRepos } = await import('@/lib/github');
     const dir = mkdtempSync(join(tmpdir(), 'gh-'));
-    const repo = { name: 'prometheus', stars: 1, pushedAt: '2026-08-14T04:23:55Z', url: 'https://github.com/witharyan/prometheus' };
+    const repo = { name: 'prometheus', stars: 1, pushedAt: '2026-08-14T04:23:55Z', url: 'https://github.com/patelaryandev/prometheus' };
     writeFileSync(join(dir, 'github-snapshot.json'), JSON.stringify([repo]));
     expect(loadRepos(dir)).toEqual([repo]);
     writeFileSync(join(dir, 'github.json'), JSON.stringify([{ ...repo, stars: 5 }]));

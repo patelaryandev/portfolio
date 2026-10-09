@@ -101,6 +101,6 @@ export const caseStudies: CaseStudy[] = [
       { title: 'Metrics and errors wired in', file: 'prometheus/main.py', lang: 'python', source: 'prometheus · app/main.py', note: 'Prometheus metrics wired into the app; Sentry starts when a DSN is configured' },
     ],
     results: ['CI, CodeQL and a release workflow on GitHub Actions', 'Versioned images on GHCR', 'Deploy blueprint for Render included'],
-    links: [{ label: 'Source on GitHub', href: 'https://github.com/witharyan/prometheus' }],
+    links: [{ label: 'Source on GitHub', href: 'https://github.com/patelaryandev/prometheus' }],
   },
 ];

@@ -4,7 +4,7 @@ export type Entry = {
   status?: 'current';
   kind: 'project' | 'win';
   stack: string[];
-  repo?: string;                   // public repo name under witharyan, used as the GitHub allowlist
+  repo?: string;                   // public repo name under patelaryandev, used as the GitHub allowlist
   page?: 'gfg-rkgit' | 'nivaran' | 'prometheus';
   featured?: boolean;              // shown on the homepage
   pen?: string;                    // optional pencil note, at most 2 on a screen

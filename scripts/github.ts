@@ -3,12 +3,12 @@ import { entries } from '../content/projects.ts';
 import { pickRepos } from '../lib/github.ts';
 
 const allow = entries.flatMap((e) => (e.repo ? [e.repo] : []));
-const headers: Record<string, string> = { accept: 'application/vnd.github+json', 'user-agent': 'witharyan-build' };
+const headers: Record<string, string> = { accept: 'application/vnd.github+json', 'user-agent': 'patelaryandev-build' };
 if (process.env.GITHUB_TOKEN) headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
 
 try {
   const api = process.env.GITHUB_API_URL ?? 'https://api.github.com';
-  const res = await fetch(`${api}/users/witharyan/repos?per_page=100`, { headers, signal: AbortSignal.timeout(8000) });
+  const res = await fetch(`${api}/users/patelaryandev/repos?per_page=100`, { headers, signal: AbortSignal.timeout(8000) });
   if (!res.ok) throw new Error(`GitHub ${res.status}`);
   const repos = pickRepos(await res.json(), allow);
   const out = process.argv.includes('--write-snapshot') ? 'content/github-snapshot.json' : 'content/github.json';

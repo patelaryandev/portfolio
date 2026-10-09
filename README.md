@@ -1,4 +1,4 @@
-# witharyan
+# patelaryan.dev
 
 Personal portfolio of Aryan Patel, live at https://patelaryan.dev. Next.js static export served by one Cloudflare Worker.
 
