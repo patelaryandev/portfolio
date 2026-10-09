@@ -112,10 +112,11 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 .excerpt[open] summary .less { display: inline; }
 .excerpt[open] summary { border-bottom: 1px solid var(--rule); }
 .excerpt summary::-webkit-details-marker { display: none; }
-.parts { display: grid; gap: 12px; }
-.parts div { border-left: 3px solid var(--ink); padding-left: 14px; }
+.parts { display: grid; border-bottom: 1px solid var(--rule); }
+.parts div { display: grid; grid-template-columns: 150px 1fr; gap: 4px 20px; padding: 12px 0; border-top: 1px solid var(--rule); }
 .parts dt { font-weight: 600; }
-.parts dd { margin: 2px 0 0; max-width: 68ch; }
+.parts dd { margin: 0; max-width: 68ch; }
+@media (max-width: 560px) { .parts div { grid-template-columns: 1fr; } }
 
 .drawing { position: relative; border: 1px solid var(--ink); padding: 16px; overflow-x: auto; }
 .drawing svg { display: block; min-width: 600px; width: 100%; height: auto; }
