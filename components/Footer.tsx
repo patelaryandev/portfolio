@@ -3,24 +3,19 @@ import build from '@/content/build.json';
 import type { BuildStamp } from '@/lib/stamp';
 import { siteVersion } from '@/lib/version';
 
-const stamp = build as BuildStamp;
-const version = siteVersion(new Date(stamp.time));
+const version = siteVersion(new Date((build as BuildStamp).time));
 
-// The bottom edge of the sheet: a scale ruler over one mono line. Revision and build come from the real deploy.
+// Mirrors the nav: a full-width bar with an ink rule that closes the sheet, same outlined buttons.
 export function Footer() {
   return (
-    <footer className="wrap foot">
-      <p className="foot-id">
-        <span>{site.name}</span>
-        <span>rev {version}{stamp.commitUrl ? <> · <a href={stamp.commitUrl}>{stamp.sha}</a></> : <> · {stamp.sha}</>}</span>
-      </p>
-      <nav className="foot-links" aria-label="Contact">
-        <a href={`mailto:${site.email}`}>Email</a>
-        <a href={site.github}>GitHub</a>
-        <a href={site.linkedin}>LinkedIn</a>
-        <a href="/resume.pdf">Resume ↓</a>
-        <a href="#top" aria-label="Back to top">↑</a>
-      </nav>
+    <footer className="foot">
+      <p className="foot-open"><span className="dot" />Open to {site.profile.lookingFor}<small>rev {version}</small></p>
+      <ul className="foot-links">
+        <li><a className="foot-mail" href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li><a href={site.github}>GitHub</a></li>
+        <li><a href={site.linkedin}>LinkedIn</a></li>
+        <li><a className="foot-top" href="#top" aria-label="Back to top">↑</a></li>
+      </ul>
     </footer>
   );
 }
