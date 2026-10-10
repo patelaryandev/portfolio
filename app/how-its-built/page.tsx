@@ -73,7 +73,7 @@ export default function HowItsBuilt() {
         </ul>
       </div>
     </main>
-    <Footer sheet="2 / 2" />
+    <Footer />
     </>
   );
 }

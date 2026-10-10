@@ -46,7 +46,7 @@ export default async function CaseStudyPage({ params }: Props) {
       <ul className="results">{c.results.map((r) => <li key={r}>{r}</li>)}</ul>
       {c.links.length ? <p className="more">{c.links.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}</p> : null}
     </main>
-    <Footer sheet="Case study" />
+    <Footer />
     </>
   );
 }

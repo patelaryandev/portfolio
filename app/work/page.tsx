@@ -20,7 +20,7 @@ export default function Work() {
       <p className="lede">Projects and wins, newest first. The version is the semester I shipped it in.</p>
       <Changelog items={items} />
     </main>
-    <Footer sheet="Releases" />
+    <Footer />
     </>
   );
 }

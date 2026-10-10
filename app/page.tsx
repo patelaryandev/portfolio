@@ -75,7 +75,7 @@ export default function Home() {
         </div>
       </aside>
     </main>
-    <Footer sheet="1 / 2" />
+    <Footer />
     </>
   );
 }
