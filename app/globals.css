@@ -349,18 +349,18 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
 /* Footer: mirrors the nav, closes the sheet with an ink rule */
 .site-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px 16px; padding: 14px 56px; margin-top: 56px; border-top: 1.5px solid var(--ink); font-size: 14px; background: var(--paper); }
 .home + .site-foot { margin-top: 0; }
-.foot-open { display: flex; align-items: baseline; font-weight: 500; }
-.foot-open .dot { align-self: center; }
-.foot-open small { margin-left: 14px; font-family: var(--font-mono), monospace; font-size: 12px; font-weight: 400; color: var(--muted); }
-.foot-links { list-style: none; padding: 0; display: flex; gap: 8px; align-items: center; }
-.foot-links a { text-decoration: none; height: 34px; padding: 0 14px; display: inline-flex; align-items: center; border: 1.5px solid var(--ink); background: #FBFAF6; font-weight: 500; transition: transform .12s ease, box-shadow .12s ease; }
-.foot-links a:hover, .foot-links a:focus-visible { transform: translate(-2px, -2px); box-shadow: 3px 3px 0 var(--ink); }
-.foot-links a.foot-mail { background: var(--ink); color: var(--paper); font-family: var(--font-mono), monospace; font-size: 13px; }
-.foot-links a.foot-mail:hover, .foot-links a.foot-mail:focus-visible { box-shadow: 3px 3px 0 var(--accent); }
-.foot-links a.foot-top { width: 34px; padding: 0; justify-content: center; }
+.sf-open { display: flex; align-items: baseline; font-weight: 500; }
+.sf-open .dot { align-self: center; }
+.sf-open small { margin-left: 14px; font-family: var(--font-mono), monospace; font-size: 12px; font-weight: 400; color: var(--muted); }
+.sf-links { list-style: none; padding: 0; display: flex; gap: 8px; align-items: center; }
+.sf-links a { text-decoration: none; height: 34px; padding: 0 14px; display: inline-flex; align-items: center; border: 1.5px solid var(--ink); background: #FBFAF6; font-weight: 500; transition: transform .12s ease, box-shadow .12s ease; }
+.sf-links a:hover, .sf-links a:focus-visible { transform: translate(-2px, -2px); box-shadow: 3px 3px 0 var(--ink); }
+.sf-links a.sf-mail { background: var(--ink); color: var(--paper); font-family: var(--font-mono), monospace; font-size: 13px; }
+.sf-links a.sf-mail:hover, .sf-links a.sf-mail:focus-visible { box-shadow: 3px 3px 0 var(--accent); }
+.sf-links a.sf-top { width: 34px; padding: 0; justify-content: center; }
 @media (max-width: 1000px) {
   .site-foot { padding: 12px 16px; margin-top: 40px; flex-direction: column; align-items: flex-start; font-size: 13px; }
-  .foot-links { flex-wrap: wrap; gap: 6px; }
-  .foot-links a { height: 32px; padding: 0 10px; }
+  .sf-links { flex-wrap: wrap; gap: 6px; }
+  .sf-links a { height: 32px; padding: 0 10px; }
 }
-@media (prefers-reduced-motion: reduce) { .foot-links a { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .sf-links a { transition: none; } }
