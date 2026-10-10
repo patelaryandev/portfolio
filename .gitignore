@@ -107,3 +107,4 @@ graphify-out/
 
 # Design-phase previews: own local git repo, never pushed (deployed with wrangler pages deploy)
 /design-preview/
+patelaryandev/
