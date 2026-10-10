@@ -11,6 +11,7 @@ import { site } from '@/content/site';
 import { formatBuilt, type BuildStamp } from '@/lib/stamp';
 import { siteVersion, withVersions } from '@/lib/version';
 import { Nav } from '@/components/Nav';
+import { Footer } from '@/components/Footer';
 
 const stamp = build as BuildStamp;
 
@@ -69,11 +70,12 @@ export default function Home() {
           {/* wide screens: the right margin of a drawing sheet (zone letters, centre mark, sheet id), pinned with the panel */}
           <div className="sheet-edge" aria-hidden="true">
             <ol className="zones">{ZONES.map((z) => <li key={z}>{z}</li>)}</ol>
-            <span className="sheet-id">patelaryan.dev · sheet 1 of 1 · rev {version}</span>
+            <span className="sheet-id">patelaryan.dev · sheet 1 of 2 · rev {version}</span>
           </div>
         </div>
       </aside>
     </main>
+    <Footer sheet="1 / 2" />
     </>
   );
 }

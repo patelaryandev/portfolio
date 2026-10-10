@@ -5,6 +5,7 @@ import { entries } from '@/content/projects';
 import { attachRepos, loadRepos } from '@/lib/github';
 import { withVersions } from '@/lib/version';
 import { Nav } from '@/components/Nav';
+import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = { title: 'Every release', description: 'Every project and hackathon, newest first.' };
 
@@ -19,6 +20,7 @@ export default function Work() {
       <p className="lede">Projects and wins, newest first. The version is the semester I shipped it in.</p>
       <Changelog items={items} />
     </main>
+    <Footer sheet="Releases" />
     </>
   );
 }

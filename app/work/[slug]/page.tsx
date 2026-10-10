@@ -5,6 +5,7 @@ import { CodeExcerpt } from '@/components/CodeExcerpt';
 import { Drawing } from '@/components/Drawing';
 import { caseStudies } from '@/content/case-studies';
 import { Nav } from '@/components/Nav';
+import { Footer } from '@/components/Footer';
 
 export const dynamicParams = false;
 export const generateStaticParams = () => caseStudies.map((c) => ({ slug: c.slug }));
@@ -45,6 +46,7 @@ export default async function CaseStudyPage({ params }: Props) {
       <ul className="results">{c.results.map((r) => <li key={r}>{r}</li>)}</ul>
       {c.links.length ? <p className="more">{c.links.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}</p> : null}
     </main>
+    <Footer sheet="Case study" />
     </>
   );
 }

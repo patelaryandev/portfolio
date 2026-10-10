@@ -3,13 +3,13 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Blueprint } from '@/components/Blueprint';
 import { CodeExcerpt } from '@/components/CodeExcerpt';
-import { TitleBlock } from '@/components/TitleBlock';
 import build from '@/content/build.json';
 import weight from '@/content/weight.json';
 import { formatBuilt, type BuildStamp } from '@/lib/stamp';
 import { siteVersion } from '@/lib/version';
 import type { Weight } from '@/lib/weight';
 import { Nav } from '@/components/Nav';
+import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = { title: "How it's built", description: 'This site, documented by its own build: request path, deploy path, page weight and the Worker source.' };
 
@@ -71,13 +71,9 @@ export default function HowItsBuilt() {
         <ul className="decisions">
           {decisions.map(([x, y, z]) => <li key={x}>Chose <b>{x}</b> over {y}, because {z}.</li>)}
         </ul>
-
-        <TitleBlock cells={[
-          { label: 'Drawn by', value: 'Aryan Patel' }, { label: 'Revision', value: version },
-          { label: 'Build', value: stamp.sha }, { label: 'Sheet', value: '2 / 2' },
-        ]} />
       </div>
     </main>
+    <Footer sheet="2 / 2" />
     </>
   );
 }

@@ -345,3 +345,31 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
   .btn, .card, .nav ul a, .card .go i span, .log a.stretch .arr, .top a, .kicker a, .live a, .more a, .decision .gh, .card .foot .ext, .log a.above { transition: none; }
   .btn:hover, .card:hover, .card:focus-within, .nav ul a:hover, .nav ul a:focus-visible, .log .row:hover a.stretch .arr, .card:hover .go i span, .card:focus-within .go i span { transform: none; }
 }
+
+/* Footer: the bottom edge of the drawing sheet */
+.foot-sheet { border-top: 1.5px solid var(--ink); margin-top: 72px; }
+.foot-sheet .wrap { padding: 36px 56px 0; }
+.fs-main { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; padding-bottom: 32px; }
+.fs-notes h2 { font-family: var(--font-mono), monospace; font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.fs-notes ol { padding-left: 22px; font-family: var(--font-serif), serif; font-size: 22px; line-height: 1.4; max-width: 34ch; }
+.fs-notes li { margin-top: 4px; }
+.fs-notes li::marker { font-family: var(--font-mono), monospace; font-size: 13px; color: var(--accent); }
+.fs-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.fs-links .btn small { font-family: var(--font-mono), monospace; font-size: 11px; color: var(--muted); }
+.foot-sheet .tblock { grid-auto-flow: column; grid-auto-columns: 1fr; border-right: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); }
+.foot-sheet .tblock div { min-width: 0; overflow-wrap: anywhere; }
+.foot-sheet .tblock a { text-decoration: none; border-bottom: 1px solid var(--accent); }
+.foot-sheet .tblock a:hover { color: var(--accent); }
+.fs-end { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0 20px; font-family: var(--font-mono), monospace; font-size: 12px; color: var(--muted); }
+.fs-end a { text-decoration: none; color: var(--ink); }
+.fs-end a:hover { color: var(--accent); }
+@media (max-width: 1000px) {
+  .foot-sheet { margin-top: 48px; }
+  .foot-sheet .wrap { padding: 28px 16px 0; }
+  .fs-notes ol { font-size: 19px; }
+  .foot-sheet .tblock { grid-auto-flow: row; grid-template-columns: 1fr 1fr; }
+  .foot-sheet .tblock div { border-bottom: 1px solid var(--ink); }
+  .foot-sheet .tblock div:nth-child(n+5) { border-bottom: none; }
+  .foot-sheet .tblock div:nth-child(even) { border-right: none; }
+  .fs-links .btn { padding: 0 12px; font-size: 14px; }
+}
