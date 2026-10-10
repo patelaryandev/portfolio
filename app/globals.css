@@ -346,24 +346,17 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--acc
   .btn:hover, .card:hover, .card:focus-within, .nav ul a:hover, .nav ul a:focus-visible, .log .row:hover a.stretch .arr, .card:hover .go i span, .card:focus-within .go i span { transform: none; }
 }
 
-/* Footer: one slim title block along the bottom edge of the sheet */
-.foot { padding: 0 56px; margin-top: 56px; margin-bottom: 28px; }
-.foot-tb { grid-auto-flow: row; grid-template-columns: auto auto auto 1fr auto auto 44px; border-right: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); }
-.foot-tb div { min-width: 0; white-space: nowrap; }
-.foot-tb a { text-decoration: none; border-bottom: 1px solid var(--accent); }
-.foot-tb a:hover, .foot-tb a:focus-visible { color: var(--accent); }
-.foot-tb small { font-family: var(--font-mono), monospace; font-size: 11px; color: var(--muted); }
-.foot-tb .f-top { display: grid; place-items: center; padding: 0; }
-.foot-tb .f-top a { border: 0; width: 100%; height: 100%; display: grid; place-items: center; font-family: var(--font-mono), monospace; font-size: 16px; color: var(--ink); }
-.foot-tb .f-top a:hover, .foot-tb .f-top a:focus-visible { background: var(--ink); color: var(--paper); }
+/* Footer: a scale ruler over one mono line */
+.foot { position: relative; margin-top: 56px; padding: 18px 56px 22px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px 24px; flex-wrap: wrap; font-family: var(--font-mono), monospace; font-size: 12px; color: var(--muted); }
+.foot::before { content: ""; position: absolute; top: 0; left: 56px; right: 56px; height: 7px; border-top: 1.5px solid var(--ink);
+  background: repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 10px) top / 100% 4px no-repeat, repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 50px) top / 100% 7px no-repeat; }
+.foot-id { display: flex; gap: 8px 18px; flex-wrap: wrap; }
+.foot-id span:first-child { color: var(--ink); }
+.foot-links { display: flex; gap: 6px 20px; flex-wrap: wrap; }
+.foot a { text-decoration: none; color: var(--ink); }
+.foot a:hover, .foot a:focus-visible { color: var(--accent); }
+.foot-id a { color: var(--muted); }
 @media (max-width: 1000px) {
-  .foot { padding: 0 16px; margin-top: 40px; }
-  .foot-tb { grid-template-columns: 1fr 1fr; }
-  .foot-tb div { border-bottom: 1px solid var(--ink); }
-  .foot-tb .f-mail { grid-column: 1 / -1; order: 3; }
-  .foot-tb .f-find { order: 4; border-bottom: none; }
-  .foot-tb .f-cv { order: 5; border-right: none; border-bottom: none; }
-  .foot-tb .f-by { order: 1; }
-  .foot-tb .f-rev { order: 2; border-right: none; }
-  .foot-tb .f-when, .foot-tb .f-top { display: none; }
+  .foot { padding: 16px 16px 20px; margin-top: 40px; }
+  .foot::before { left: 16px; right: 16px; }
 }
